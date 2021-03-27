@@ -4,9 +4,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default {
   /**
-   * Port the app should run on
+   * Database the app should connect to
    */
-  port: parseInt(process.env.PORT) || 5050,
+  PREFIX: process.env.PREFIX,
 
   /**
    * Database the app should connect to
@@ -14,21 +14,14 @@ export default {
   databaseURL: process.env.MONGODB_URI,
 
   /**
-   * The secret sauce to validate JWT
+   * the secret token of the bot
    */
-  jwtSecret: process.env.JWT_SECRET,
+  TOKEN: process.env.TOKEN,
 
   /**
    * Used by Winston logger
    */
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
-  },
-
-  /**
-   * API configs
-   */
-  api: {
-    prefix: '/api',
   },
 };
