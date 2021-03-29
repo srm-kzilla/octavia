@@ -10,19 +10,24 @@
   "devDependencies": {
     "@types/mongodb": "^3.5.31",
     "@types/node": "^14.14.5",
+    "@types/yt-search": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
+    "@discordjs/opus": "^0.5.0",
     "eslint": "^7.12.1",
     "tsc-watch": "^4.2.9",
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@discordjs/opus": "^0.5.0",
     "body-parser": "^1.19.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.2.8",
     "mongodb": "^3.6.2",
-    "winston": "^3.3.3"
+    "opusscript": "^0.0.8",
+    "winston": "^3.3.3",
+    "yt-search": "^2.7.5",
+    "ytdl-core": "^4.5.0"
   },
   "author": "SRMKZILLA",
   "license": ""

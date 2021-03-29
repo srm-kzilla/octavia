@@ -6,7 +6,15 @@ export default {
   /**
    * Database the app should connect to
    */
-  PREFIX: process.env.PREFIX,
+  EMBED_FOOTER: process.env.EMBED_FOOTER || 'by the SRMKZILLA team',
+  /**
+   * Database the app should connect to
+   */
+  THUMBNAIL: process.env.THUMBNAIL,
+  /**
+   * Database the app should connect to
+   */
+  PREFIX: process.env.PREFIX || '#kzjill',
 
   /**
    * Database the app should connect to
