@@ -8,12 +8,12 @@
     "dev": "tsc-watch --onSuccess \"node ./build/index.js\""
   },
   "devDependencies": {
+    "@discordjs/opus": "^0.5.0",
     "@types/mongodb": "^3.5.31",
     "@types/node": "^14.14.5",
     "@types/yt-search": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
-    "@discordjs/opus": "^0.5.0",
     "eslint": "^7.12.1",
     "tsc-watch": "^4.2.9",
     "typescript": "^4.0.5"
