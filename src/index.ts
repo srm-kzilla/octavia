@@ -1,5 +1,16 @@
 import { Message } from 'discord.js';
-import { defaulCasetHandler, helpCommandHandler, leaveCommandHandler, playCommandHandler } from './commands.ts';
+import {
+  defaulCasetHandler,
+  helpCommandHandler,
+  leaveCommandHandler,
+  loopCommanHandler,
+  playCommandHandler,
+  puaseCommandHandler,
+  queueCommandHandler,
+  resumeCommandHandler,
+  shuffleCommandHandler,
+  skipCommandHandler,
+} from './commands.ts';
 import config from './config';
 import Loaders from './loaders';
 import discord from './loaders/discord';
@@ -20,6 +31,24 @@ const discordHandler = async () => {
             break;
           case 'leave':
             leaveCommandHandler(message);
+            break;
+          case 'queue':
+            queueCommandHandler(message);
+            break;
+          case 'skip':
+            skipCommandHandler(message);
+            break;
+          case 'pause':
+            puaseCommandHandler(message);
+            break;
+          case 'resume':
+            resumeCommandHandler(message);
+            break;
+          case 'loop':
+            loopCommanHandler(message);
+            break;
+          case 'shuffle':
+            shuffleCommandHandler(message);
             break;
           default:
             defaulCasetHandler(message);
