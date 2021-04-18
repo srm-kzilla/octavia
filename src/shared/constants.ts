@@ -23,7 +23,7 @@ export const ERROR_MESSAGES = {
   DEFAULT_DESCRIPTION: `Wrong command. try: **${config.PREFIX} help** to see a list of valid commands`,
   USER_NOT_IN_A_VOICE_CHANNEL: `Oops, it seems like you are not in a voice channel. Please join one.`,
   BOT_NOT_IN_A_VOICE_CHANNEL: 'ummm... I am not in a voice channel.',
-  USER_NOT_IN_THE_SAME_CHANNEL: 'You cannot disconnect the bot if you are in a different channel!',
+  USER_NOT_IN_THE_SAME_CHANNEL: 'You need to be in the same channel as that of me to use my services!',
   NO_SONG_URL_OR_KEYWORD: `Please enter a link or a song name!`,
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song.`,
 };
@@ -32,7 +32,7 @@ export const MESSAGES = {
   HELP_TITLE: '',
   HELP_DESCRIPTION: '',
   LEAVE_CHANNEL: 'I have left the voice channel!',
-  SONG_OVER: 'The current song has finished playing...',
+  SONG_OVER: 'Finished playing: ',
   SONG_START: 'Now playing : ',
 };
 
