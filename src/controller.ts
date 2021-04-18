@@ -132,7 +132,7 @@ export const skipSong = async message => {
     connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong === 1 &&
     connectionMap.get(message.guild.id).loop === false
   )
-    return message.reply('cannot skip, queue empty. Add songs and then then try skipping.');
+    return message.reply(ERROR_MESSAGES.UNABLE_TO_SKIP);
   else if (
     connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong === 1 &&
     connectionMap.get(message.guild.id).loop === true

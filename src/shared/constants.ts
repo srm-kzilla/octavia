@@ -41,6 +41,7 @@ export const ERROR_MESSAGES = {
   USER_NOT_IN_THE_SAME_CHANNEL: 'You need to be in the same channel as that of me to use my services!',
   NO_SONG_URL_OR_KEYWORD: `Please enter a link or a song name!`,
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song.`,
+  UNABLE_TO_SKIP: 'cannot skip, queue empty. Add songs and then then try skipping.',
 };
 
 export const MESSAGES = {
