@@ -15,39 +15,40 @@ import config from './config';
 import Loaders from './loaders';
 import discord from './loaders/discord';
 import LoggerInstance from './loaders/logger';
+import { COMMANDS, EMOJIS } from './shared/constants';
 
 const discordHandler = async () => {
   try {
     const client = await discord();
-    client.on('message', (message: Message) => {
+    client.on('message', async (message: Message) => {
       const messageArray = message.content.trim().split(' ');
       if (!message.author.bot && messageArray[0] === config.PREFIX) {
         switch (messageArray[1]) {
-          case 'help':
+          case COMMANDS.HELP:
             helpCommandHandler(message);
             break;
-          case 'play':
+          case COMMANDS.PLAY:
             playCommandHandler(message);
             break;
-          case 'leave':
+          case COMMANDS.LEAVE:
             leaveCommandHandler(message);
             break;
-          case 'queue':
+          case COMMANDS.QUEUE:
             queueCommandHandler(message);
             break;
-          case 'skip':
+          case COMMANDS.SKIP:
             skipCommandHandler(message);
             break;
-          case 'pause':
+          case COMMANDS.PAUSE:
             puaseCommandHandler(message);
             break;
-          case 'resume':
+          case COMMANDS.RESUME:
             resumeCommandHandler(message);
             break;
-          case 'loop':
+          case COMMANDS.LOOP:
             loopCommanHandler(message);
             break;
-          case 'shuffle':
+          case COMMANDS.SHUFFLE:
             shuffleCommandHandler(message);
             break;
           default:
@@ -55,6 +56,7 @@ const discordHandler = async () => {
             break;
         }
       }
+      await message.react(EMOJIS.REACTION_DEFAULT);
     });
   } catch (error) {
     LoggerInstance.error(error.message);

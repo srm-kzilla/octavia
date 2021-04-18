@@ -1,5 +1,5 @@
 import { connectionMap } from '../controller';
-import { ERROR_MESSAGES } from '../shared/constants';
+import { ERROR_MESSAGES, MESSAGES } from '../shared/constants';
 
 export const resumeCommand = message => {
   if (!message.member.voice.channel) return message.reply(ERROR_MESSAGES.USER_NOT_IN_A_VOICE_CHANNEL);
@@ -10,5 +10,5 @@ export const resumeCommand = message => {
       return message.reply(ERROR_MESSAGES.USER_NOT_IN_THE_SAME_CHANNEL);
   }
   connectionMap.get(message.guild.id).dispatcher.resume();
-  message.channel.send('music resumed');
+  message.channel.send(MESSAGES.MUSIC_RESUME);
 };
