@@ -10,7 +10,7 @@ import {
   resumeCommandHandler,
   shuffleCommandHandler,
   skipCommandHandler,
-} from './commands.ts';
+} from './commands';
 import config from './config';
 import Loaders from './loaders';
 import discord from './loaders/discord';
