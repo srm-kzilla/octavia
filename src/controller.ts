@@ -71,13 +71,14 @@ export const queueAdd = async (message, songData) => {
 };
 
 const validateUrl = url => {
-  var pattern = new RegExp(REGEX.YOUTUBE_REGEX);
+  let pattern = new RegExp(REGEX.YOUTUBE_REGEX);
   return pattern.test(url);
 };
 
 const playUrl = async (message, song) => {
   try {
     let stream = ytdl(song.url, { filter: 'audioonly' });
+    LoggerInstance.info(`playing: `);
     let dispatcher: StreamDispatcher = (await connection(message)).play(stream, { volume: 1 });
     connectionMap.get(message.guild.id).dispatcher = dispatcher;
     await dispatcherControl(message, dispatcher, song);
