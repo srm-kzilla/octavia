@@ -13,6 +13,7 @@ export const COLOR_CODES = {
   WRONG_COMMAND_COLOR_CODE: '#ff0000',
   HELP_COLOR_CODE: '#0066ff',
   DEFAULT: '#008080',
+  LEAVE: '#ff1a75',
 };
 
 export const randomNumber = (max: number) => {
@@ -54,6 +55,10 @@ export const MESSAGES = {
   LOOP_OFF: 'Loop off!',
   MUSIC_PAUSE: 'Music pause!⏸',
   MUSIC_RESUME: 'Music resume!▶',
+  LEAVE: {
+    TITLE: 'Leaving the channel!',
+    DESCRIPTION: `Hi, I am leaving the channel due to inactivity, but do not fret, you can play music again! Use ${config.PREFIX} ${COMMANDS.HELP} to see the list of my commands.`,
+  },
 };
 
 export const REGEX = {

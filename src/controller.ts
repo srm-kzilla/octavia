@@ -1,5 +1,5 @@
 import LoggerInstance from './loaders/logger';
-import { EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX } from './shared/constants';
+import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX } from './shared/constants';
 import ytdl from 'ytdl-core';
 import { Message, StreamDispatcher } from 'discord.js';
 import yts from 'yt-search';
@@ -111,7 +111,7 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
         connectionMap.get(message.guild.id).currentSong = 0;
         playUrl(message, connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong]);
       }
-      timer(message);
+      await timer(message);
     });
   } catch (error) {
     LoggerInstance.error(error.message);
@@ -146,8 +146,16 @@ export const skipSong = async message => {
 };
 
 const timer = async message => {
-  let timer = setTimeout(() => {
-    message.guild.me.voice.channel.leave();
-  }, 15000);
-  connectionMap.get(message.guild.id).timer = timer;
+  try {
+    let timer = setTimeout(async () => {
+      await message.guild.me.voice.channel.leave();
+      message.channel.send(
+        EMBED().setColor(COLOR_CODES.LEAVE).setTitle(MESSAGES.LEAVE.TITLE).setDescription(MESSAGES.LEAVE.DESCRIPTION),
+      );
+    }, 15000);
+    connectionMap.get(message.guild.id).timer = timer;
+  } catch (error) {
+    LoggerInstance.error(error.message);
+    message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
+  }
 };
