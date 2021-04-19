@@ -90,6 +90,7 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
   try {
     let msg: Message;
     dispatcher.on('start', async () => {
+      if (connectionMap.get(message.guild.id).timer) clearTimeout(connectionMap.get(message.guild.id).timer);
       msg = await message.channel.send(
         EMBED()
           .setTitle(`${MESSAGES.SONG_START + song.title}`)
@@ -110,6 +111,7 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
         connectionMap.get(message.guild.id).currentSong = 0;
         playUrl(message, connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong]);
       }
+      timer(message);
     });
   } catch (error) {
     LoggerInstance.error(error.message);
@@ -141,4 +143,11 @@ export const skipSong = async message => {
     playUrl(message, connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong]);
   } else if (connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong !== 1)
     playUrl(message, connectionMap.get(message.guild.id).queue[++connectionMap.get(message.guild.id).currentSong]);
+};
+
+const timer = async message => {
+  let timer = setTimeout(() => {
+    message.guild.me.voice.channel.leave();
+  }, 15000);
+  connectionMap.get(message.guild.id).timer = timer;
 };

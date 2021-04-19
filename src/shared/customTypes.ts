@@ -7,4 +7,5 @@ export type Play = {
   guildID: string;
   currentSong: number;
   loop: boolean;
+  timer?: NodeJS.Timeout;
 };

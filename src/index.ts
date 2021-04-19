@@ -55,8 +55,8 @@ const discordHandler = async () => {
             defaulCasetHandler(message);
             break;
         }
+        await message.react(EMOJIS.REACTION_DEFAULT);
       }
-      await message.react(EMOJIS.REACTION_DEFAULT);
     });
   } catch (error) {
     LoggerInstance.error(error.message);
