@@ -4,6 +4,7 @@ import ytdl from 'ytdl-core';
 import { Message, StreamDispatcher } from 'discord.js';
 import yts from 'yt-search';
 import { Play } from './shared/customTypes';
+import { resumeCommandHandler } from './commands';
 
 export let connectionMap = new Map();
 
@@ -23,7 +24,7 @@ export const playRequest = async message => {
       connectionMap.set(message.guild.id, music);
     }
     let arrayKeywords = message.content.trim().split(' ');
-    if (arrayKeywords.length < 3) return message.reply(ERROR_MESSAGES.NO_SONG_URL_OR_KEYWORD);
+    if (arrayKeywords.length < 3) return resumeCommandHandler(message);
     let songUrl = arrayKeywords[2];
     if (!validateUrl(songUrl)) {
       let song = await searchSong(arrayKeywords.slice(2).join());
