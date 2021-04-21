@@ -1,6 +1,7 @@
+import { Message } from 'discord.js';
 import { COLOR_CODES, EMBED, MESSAGES } from '../shared/constants';
 
-export const helpCommand = message => {
+export const helpCommand = (message: Message) => {
   message.channel.send(
     EMBED()
       .setTitle(MESSAGES.HELP_TITLE)
