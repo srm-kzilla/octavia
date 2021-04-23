@@ -1,6 +1,6 @@
 import { skipSong } from '../controller';
-import { channelCheck } from '../shared/auth';
+import { userInVoiceChannelCheck } from '../shared/auth';
 
 export const skipCommand = async message => {
-  if (channelCheck(message)) await skipSong(message);
+  if (userInVoiceChannelCheck(message)) await skipSong(message);
 };

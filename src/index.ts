@@ -3,8 +3,9 @@ import {
   defaulCasetHandler,
   helpCommandHandler,
   leaveCommandHandler,
-  loopCommanHandler,
+  loopCommandHandler,
   playCommandHandler,
+  previousCommandHandler,
   puaseCommandHandler,
   queueCommandHandler,
   resumeCommandHandler,
@@ -46,10 +47,13 @@ const discordHandler = async () => {
             resumeCommandHandler(message);
             break;
           case COMMANDS.LOOP:
-            loopCommanHandler(message);
+            loopCommandHandler(message);
             break;
           case COMMANDS.SHUFFLE:
             shuffleCommandHandler(message);
+            break;
+          case COMMANDS.PREVIOUS:
+            previousCommandHandler(message);
             break;
           default:
             defaulCasetHandler(message);

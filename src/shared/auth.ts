@@ -1,6 +1,6 @@
 import { ERROR_MESSAGES } from './constants';
 
-export const channelCheck = message => {
+export const userInVoiceChannelCheck = message => {
   if (!message.member.voice.channel) {
     message.reply(ERROR_MESSAGES.USER_NOT_IN_A_VOICE_CHANNEL);
     return false;
