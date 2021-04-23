@@ -29,6 +29,7 @@ export const COMMANDS = {
   RESUME: 'resume',
   LOOP: 'loop',
   SHUFFLE: 'shuffle',
+  PREVIOUS: 'previous',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
@@ -43,9 +44,11 @@ export const ERROR_MESSAGES = {
   NO_SONG_URL_OR_KEYWORD: `Please enter a link or a song name!`,
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song.`,
   UNABLE_TO_SKIP: 'cannot skip, queue empty. Add songs and then then try skipping.',
+  UNABLE_TO_FIND_PLAYLIST: 'Hi, I was unable to find the playlist, please check and try again.',
 };
 
 export const MESSAGES = {
+  PLAYLIST_ADDED: 'Your playlist has been added to the queue!',
   HELP_TITLE: '',
   HELP_DESCRIPTION: '',
   LEAVE_CHANNEL: 'I have left the voice channel!',
@@ -59,6 +62,7 @@ export const MESSAGES = {
     TITLE: 'Leaving the channel!',
     DESCRIPTION: `Hi, I am leaving the channel due to inactivity, but do not fret, you can play music again! Use ${config.PREFIX} ${COMMANDS.HELP} to see the list of my commands.`,
   },
+  CANNOT_PLAY_PREVIOUS_SONG: 'There are no songs before the current song in the queue.',
 };
 
 export const REGEX = {
@@ -67,4 +71,15 @@ export const REGEX = {
 
 export const EMOJIS = {
   REACTION_DEFAULT: '🔥',
+};
+
+export const CONSTANT_URL = {
+  YOUTUBE_API: (listID, nextPageToken) => {
+    if (!nextPageToken)
+      return `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2C%20snippet&maxResults=50&playlistId=${listID}&key=${config.YOUTUBE_API_KEY}`;
+    return `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2C%20snippet&maxResults=50&playlistId=${listID}&key=${config.YOUTUBE_API_KEY}&pageToken=${nextPageToken}`;
+  },
+  SONG_URL: videoID => {
+    return `https://www.youtube.com/watch?v=${videoID}`;
+  },
 };

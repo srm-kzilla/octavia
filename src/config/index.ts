@@ -25,7 +25,7 @@ export default {
    * the secret token of the bot
    */
   TOKEN: process.env.TOKEN,
-
+  YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
   /**
    * Used by Winston logger
    */
