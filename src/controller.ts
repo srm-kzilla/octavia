@@ -1,10 +1,11 @@
 import LoggerInstance from './loaders/logger';
-import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX } from './shared/constants';
+import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX, CONSTANT_URL } from './shared/constants';
 import ytdl from 'ytdl-core';
 import { Message, StreamDispatcher } from 'discord.js';
 import yts from 'yt-search';
 import { Play } from './shared/customTypes';
 import { resumeCommandHandler } from './commands';
+import axios from 'axios';
 
 export let connectionMap = new Map();
 
@@ -20,20 +21,26 @@ export const playRequest = async message => {
         currentSong: 0,
         loop: false,
       };
-      LoggerInstance.info(`Joined the voice channel: ${message.guild.me.voice.channel}`);
       connectionMap.set(message.guild.id, music);
     }
     let arrayKeywords = message.content.trim().split(' ');
     if (arrayKeywords.length < 3) return resumeCommandHandler(message);
     let songUrl = arrayKeywords[2];
     if (!validateUrl(songUrl)) {
-      let song = await searchSong(arrayKeywords.slice(2).join());
-      if (song.url !== null) {
+      let song = await searchSong(message, arrayKeywords.slice(2).join());
+      if (song.url !== null && song.title !== null) {
         await queueAdd(message, song);
-      } else message.reply(ERROR_MESSAGES.UNABLE_TO_FIND_A_MATCH);
+      }
     }
     if (validateUrl(songUrl)) {
-      await queueAdd(message, { title: await searchTitle(songUrl), url: songUrl });
+      if (!(await playlistYoutube(message, songUrl))) {
+        let title = await searchTitle(message, songUrl);
+        if (title) {
+          await queueAdd(message, { title: title, url: songUrl });
+        }
+      } else {
+        message.channel.send(MESSAGES.PLAYLIST_ADDED);
+      }
     }
   } catch (error) {
     LoggerInstance.error(error.message);
@@ -53,7 +60,6 @@ const connection = async (message: Message) => {
         currentSong: 0,
         loop: false,
       };
-      LoggerInstance.info(`Joined the voice channel: ${message.guild.me.voice.channel}`);
       connectionMap.set(message.guild.id, music);
     }
     return connectionMap.get(message.guild.id).connection;
@@ -75,10 +81,43 @@ const validateUrl = url => {
   return pattern.test(url);
 };
 
+const playlistYoutube = async (message, url: string, nextPageToken?: string) => {
+  try {
+    if (!(url.indexOf('list=') > 5)) return false;
+    let listID = url.substring(url.indexOf('list=') + 5, url.indexOf('&', url.indexOf('list=')));
+    let list = await axios({
+      method: 'get',
+      url: CONSTANT_URL.YOUTUBE_API(listID, nextPageToken),
+      responseType: 'json',
+    });
+    if (!list) {
+      message.reply(ERROR_MESSAGES.UNABLE_TO_FIND_PLAYLIST);
+      return false;
+    }
+    await addPlaylistSongToQueue(list, message);
+    if (list.data.nextPageToken) {
+      let nextPageToken = list.data.nextPageToken;
+      await playlistYoutube(message, url, nextPageToken);
+    }
+    return true;
+  } catch (error) {
+    LoggerInstance.error(error.message);
+  }
+};
+
+const addPlaylistSongToQueue = async (list, message) => {
+  for (let i = 0; i < list.data.items.length; i++) {
+    queueAdd(message, {
+      title: `${list.data.items[i].snippet.title}`,
+      url: CONSTANT_URL.SONG_URL(list.data.items[i].contentDetails.videoId),
+    });
+  }
+};
+
 const playUrl = async (message, song) => {
   try {
+    if (!song.title) return message.channel.send('could not find the song');
     let stream = ytdl(song.url, { filter: 'audioonly' });
-    LoggerInstance.info(`playing: `);
     let dispatcher: StreamDispatcher = (await connection(message)).play(stream, { volume: 1 });
     connectionMap.get(message.guild.id).dispatcher = dispatcher;
     await dispatcherControl(message, dispatcher, song);
@@ -121,13 +160,21 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
   }
 };
 
-const searchSong = async song => {
+const searchSong = async (message, song) => {
   const data = (await yts(song)).videos.slice(0, 1);
+  if (!data[0]) {
+    message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_A_MATCH);
+    return;
+  }
   return { title: data[0].title, url: data[0].url };
 };
 
-const searchTitle = async song => {
+const searchTitle = async (message, song) => {
   const data = (await yts(song)).videos.slice(0, 1);
+  if (!data[0]) {
+    message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_A_MATCH);
+    return;
+  }
   return data[0].title;
 };
 
@@ -160,4 +207,10 @@ const timer = async message => {
     LoggerInstance.error(error.message);
     message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
   }
+};
+
+export const previousSong = async message => {
+  if (connectionMap.get(message.guild.id).queue.length < 2)
+    return message.channel.send(MESSAGES.CANNOT_PLAY_PREVIOUS_SONG);
+  playUrl(message, connectionMap.get(message.guild.id).queue[--connectionMap.get(message.guild.id).currentSong]);
 };
