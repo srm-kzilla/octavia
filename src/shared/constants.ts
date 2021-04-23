@@ -67,6 +67,9 @@ export const MESSAGES = {
 
 export const REGEX = {
   YOUTUBE_REGEX: `^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+`,
+  SPOTIFY_REGEX: `^((spotify:)(track|playlist|album):.+)|(http(s)?:\/\/)?(open.)(spotify)(\.com)\/(track|playlist|album)\/.+`,
+  SPOTIFY_WEB_URL_REGEX: `(http(s)?:\/\/)?(open.)(spotify)(\.com)\/(track|playlist|album)\/.+`,
+  SPOTIFY_URL_REGEX: `^((spotify:)(track|playlist|album):.+)`,
 };
 
 export const EMOJIS = {
@@ -81,5 +84,16 @@ export const CONSTANT_URL = {
   },
   SONG_URL: videoID => {
     return `https://www.youtube.com/watch?v=${videoID}`;
+  },
+  SPOTIFY_TRACK_API: id => {
+    return `https://api.spotify.com/v1/tracks/${id}`;
+  },
+  SPOTIFY_ALBUM_API: (id, next) => {
+    if (!next) return `https://api.spotify.com/v1/albums/${id}/tracks?limit=50`;
+    else return next;
+  },
+  SPOTIFY_PLAYLIST_API: (id, next) => {
+    if (!next) return `https://api.spotify.com/v1/playlists/${id}/tracks`;
+    return next;
   },
 };
