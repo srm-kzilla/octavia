@@ -6,5 +6,6 @@ export { queueCommand as queueCommandHandler } from './queue';
 export { skipCommand as skipCommandHandler } from './skip';
 export { pauseCommand as puaseCommandHandler } from './pause';
 export { resumeCommand as resumeCommandHandler } from './resume';
-export { loopCommand as loopCommanHandler } from './loop';
+export { loopCommand as loopCommandHandler } from './loop';
 export { shuffleCommand as shuffleCommandHandler } from './shuffle';
+export { previousCommand as previousCommandHandler } from './previous';
