@@ -1,8 +1,8 @@
 import { connectionMap } from '../controller';
-import { channelCheck } from '../shared/auth';
+import { userInVoiceChannelCheck } from '../shared/auth';
 
 export const shuffleCommand = message => {
-  if (channelCheck(message)) {
+  if (userInVoiceChannelCheck(message)) {
     if (!connectionMap.get(message.guild.id).queue) return message.channel.send('The queue is empty');
     for (let i = connectionMap.get(message.guild.id).queue.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
