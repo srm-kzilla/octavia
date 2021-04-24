@@ -77,6 +77,7 @@ export const EMOJIS = {
 };
 
 export const CONSTANT_URL = {
+  SPOTIFY_TOKEN: `https://accounts.spotify.com/api/token`,
   YOUTUBE_API: (listID, nextPageToken) => {
     if (!nextPageToken)
       return `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2C%20snippet&maxResults=50&playlistId=${listID}&key=${config.YOUTUBE_API_KEY}`;

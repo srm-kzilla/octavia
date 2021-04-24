@@ -1,7 +1,6 @@
 import axios from 'axios';
-import config from '../config';
 import { queueAdd } from '../controller';
-import LoggerInstance from '../loaders/logger';
+import { getSpotifyToken as getSpotifyToken } from '../loaders/nodecache';
 import { CONSTANT_URL } from '../shared/constants';
 import { validateSpotifyUrl, validateSpotifyWebUrl } from '../shared/validation';
 import { searchSong } from '../shared/yt-search';
@@ -19,7 +18,6 @@ export const spotifyLinkHandler = async (message, url) => {
     } else {
       return message.channel.send('Not a valid playlist url');
     }
-    console.log(typeOfRequest + ' ' + id);
     switch (typeOfRequest) {
       case 'track':
         await spotifyTrackHandler(message, id);
@@ -43,7 +41,7 @@ const spotifyTrackHandler = async (message, id) => {
     let trackData = await axios({
       method: 'GET',
       url: CONSTANT_URL.SPOTIFY_TRACK_API(id),
-      headers: { Authorization: `Bearer ${config.SPOTIFY_TOKEN}` },
+      headers: { Authorization: `Bearer ${await getSpotifyToken()}` },
     });
     if (!trackData.data.name) return message.channel.send('unable to add playlist');
     await queueAdd(message, await searchSong(message, trackData.data.name));
@@ -58,7 +56,7 @@ const spotifyAlbumHandler = async (message, id, next?: string) => {
       method: 'GET',
       url: CONSTANT_URL.SPOTIFY_ALBUM_API(id, next),
       headers: {
-        Authorization: `Bearer ${config.SPOTIFY_TOKEN}`,
+        Authorization: `Bearer ${await getSpotifyToken()}`,
       },
     });
 
@@ -78,10 +76,9 @@ const spotifyPlaylistHandler = async (message, id, next?: string) => {
       method: 'GET',
       url: CONSTANT_URL.SPOTIFY_PLAYLIST_API(id, next),
       headers: {
-        Authorization: `Bearer ${config.SPOTIFY_TOKEN}`,
+        Authorization: `Bearer ${await getSpotifyToken()}`,
       },
     });
-    console.log(playlistData.data.items[0].track.name);
     if (!playlistData.data) return message.channel.send('unable to add playlist');
     await addSpotifyPlaylistSongsToQueue(message, playlistData.data.items);
     if (playlistData.data.next) {
@@ -94,10 +91,8 @@ const spotifyPlaylistHandler = async (message, id, next?: string) => {
 
 const addSpotifyALbumSongsToQueue = async (message, songs) => {
   try {
-    console.log(songs.length);
     for (let i = 0; i < songs.length; i++) {
       let url = await searchSong(message, songs[i].name);
-      console.log(i + '   ' + url.title);
       if (url) {
         queueAdd(message, {
           title: `${songs[i].name}`,
@@ -112,7 +107,6 @@ const addSpotifyALbumSongsToQueue = async (message, songs) => {
 
 const addSpotifyPlaylistSongsToQueue = async (message, songs) => {
   try {
-    console.log(songs.length);
     for (let i = 0; i < songs.length; i++) {
       let url = await searchSong(message, songs[i].track.name);
       if (url) {
