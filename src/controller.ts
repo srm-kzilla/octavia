@@ -1,12 +1,12 @@
 import LoggerInstance from './loaders/logger';
-import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber } from './shared/constants';
+import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX } from './shared/constants';
 import ytdl from 'ytdl-core';
 import { Message, StreamDispatcher } from 'discord.js';
 import { Play } from './shared/customTypes';
 import { resumeCommandHandler } from './commands';
 import { spotifyLinkHandler } from './playlistHandler/spotify';
 import { playlistYoutube } from './playlistHandler/youtube';
-import { validateSpotify, validateYoutubeUrl } from './shared/validation';
+import { validateRegex } from './shared/validation';
 import { searchSong, searchTitle } from './shared/yt-search';
 
 export let connectionMap = new Map();
@@ -28,7 +28,7 @@ export const playRequest = async message => {
     let arrayKeywords = message.content.trim().split(' ');
     if (arrayKeywords.length < 3) return resumeCommandHandler(message);
     let songUrl = arrayKeywords[2];
-    if (validateYoutubeUrl(songUrl)) {
+    if (validateRegex(songUrl, REGEX.YOUTUBE_REGEX)) {
       if (!(await playlistYoutube(message, songUrl))) {
         let title = await searchTitle(message, songUrl);
         if (title) {
@@ -37,7 +37,7 @@ export const playRequest = async message => {
       } else {
         message.channel.send(MESSAGES.PLAYLIST_ADDED);
       }
-    } else if (validateSpotify(songUrl)) {
+    } else if (validateRegex(songUrl, REGEX.SPOTIFY_REGEX)) {
       await spotifyLinkHandler(message, songUrl);
     } else {
       let song = await searchSong(message, arrayKeywords.slice(2).join());

@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { queueAdd } from '../controller';
 import { getSpotifyToken as getSpotifyToken } from '../loaders/nodecache';
-import { CONSTANT_URL } from '../shared/constants';
-import { validateSpotifyUrl, validateSpotifyWebUrl } from '../shared/validation';
+import { CONSTANT_URL, REGEX } from '../shared/constants';
+import { validateRegex } from '../shared/validation';
 import { searchSong } from '../shared/yt-search';
 
 export const spotifyLinkHandler = async (message, url) => {
   try {
     let typeOfRequest: string;
     let id: string;
-    if (validateSpotifyWebUrl(url)) {
+    if (validateRegex(url, REGEX.SPOTIFY_WEB_URL_REGEX)) {
       typeOfRequest = url.split('/')[3];
       id = url.split('/')[4].split('?')[0];
-    } else if (validateSpotifyUrl(url)) {
+    } else if (validateRegex(url, REGEX.SPOTIFY_URL_REGEX)) {
       typeOfRequest = url.split(':')[1];
       id = url.split(':')[2];
     } else {
