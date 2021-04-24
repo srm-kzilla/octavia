@@ -44,7 +44,7 @@ const spotifyTrackHandler = async (message, id) => {
       headers: { Authorization: `Bearer ${await getSpotifyToken()}` },
     });
     if (!trackData.data.name) return message.channel.send('unable to add playlist');
-    await queueAdd(message, await searchSong(message, trackData.data.name));
+    await queueAdd(message, await searchSong(message, `${trackData.data.name} ${trackData.data.artists[0].name}`));
   } catch (error) {
     throw error;
   }
@@ -92,7 +92,7 @@ const spotifyPlaylistHandler = async (message, id, next?: string) => {
 const addSpotifyALbumSongsToQueue = async (message, songs) => {
   try {
     for (let i = 0; i < songs.length; i++) {
-      let url = await searchSong(message, songs[i].name);
+      let url = await searchSong(message, `${songs[i].name} ${songs[i].artists[0].name}`);
       if (url) {
         queueAdd(message, {
           title: `${songs[i].name}`,
@@ -108,7 +108,7 @@ const addSpotifyALbumSongsToQueue = async (message, songs) => {
 const addSpotifyPlaylistSongsToQueue = async (message, songs) => {
   try {
     for (let i = 0; i < songs.length; i++) {
-      let url = await searchSong(message, songs[i].track.name);
+      let url = await searchSong(message, `${songs[i].track.name} ${songs[i].track.album.artists[0].name}`);
       if (url) {
         queueAdd(message, {
           title: `${songs[i].track.name}`,
