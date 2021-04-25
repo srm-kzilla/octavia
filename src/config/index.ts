@@ -8,6 +8,11 @@ export default {
    */
   EMBED_FOOTER: process.env.EMBED_FOOTER || 'by the SRMKZILLA team',
   /**
+   * spotify client id
+   */
+  SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+  /**
    * Database the app should connect to
    */
   THUMBNAIL: process.env.THUMBNAIL,

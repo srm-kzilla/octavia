@@ -11,6 +11,7 @@
     "@discordjs/opus": "^0.5.0",
     "@types/mongodb": "^3.5.31",
     "@types/node": "^14.14.5",
+    "@types/spotify-web-api-node": "^5.0.2",
     "@types/yt-search": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
@@ -25,7 +26,9 @@
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.8",
     "mongodb": "^3.6.2",
+    "node-cache": "^5.1.2",
     "opusscript": "^0.0.8",
+    "spotify-web-api-node": "^5.0.2",
     "winston": "^3.3.3",
     "yt-search": "^2.7.5",
     "ytdl-core": "^4.5.0"
