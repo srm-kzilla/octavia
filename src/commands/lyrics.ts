@@ -17,6 +17,7 @@ export const lyricsCommand = async message => {
       optimizeQuery: true,
     };
     const lyrics = await getLyrics(options);
+    if (!lyrics) return message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_LYRICS);
     message.channel.send(EMBED().setThumbnail('').setDescription(lyrics.substring(0, 2047)));
   } catch (error) {
     LoggerInstance.error(error.message);

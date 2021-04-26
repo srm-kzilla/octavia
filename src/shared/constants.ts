@@ -46,6 +46,7 @@ export const ERROR_MESSAGES = {
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song.`,
   UNABLE_TO_SKIP: 'cannot skip, queue empty. Add songs and then then try skipping.',
   UNABLE_TO_FIND_PLAYLIST: 'Hi, I was unable to find the playlist, please check and try again.',
+  UNABLE_TO_FIND_LYRICS: 'Oooops! I was unable to find the lyrics. 😭',
 };
 
 export const MESSAGES = {
