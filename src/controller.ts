@@ -8,6 +8,7 @@ import { spotifyLinkHandler } from './playlistHandler/spotify';
 import { playlistYoutube } from './playlistHandler/youtube';
 import { validateRegex } from './shared/validation';
 import { searchSong, searchTitle } from './shared/yt-search';
+import config from './config';
 
 export let connectionMap = new Map();
 
@@ -30,9 +31,10 @@ export const playRequest = async message => {
     let songUrl = arrayKeywords[2];
     if (validateRegex(songUrl, REGEX.YOUTUBE_REGEX)) {
       if (!(await playlistYoutube(message, songUrl))) {
-        let title = await searchTitle(message, songUrl);
-        if (title) {
-          await queueAdd(message, { title: title, url: songUrl });
+        let songDetails = await searchTitle(message, songUrl);
+        if (songDetails) {
+          let finalSongDetails = { ...songDetails, originalTitle: songDetails.title, url: songUrl };
+          await queueAdd(message, finalSongDetails);
         }
       } else {
         message.channel.send(MESSAGES.PLAYLIST_ADDED);
@@ -40,9 +42,14 @@ export const playRequest = async message => {
     } else if (validateRegex(songUrl, REGEX.SPOTIFY_REGEX)) {
       await spotifyLinkHandler(message, songUrl);
     } else {
-      let song = await searchSong(message, arrayKeywords.slice(2).join());
+      let songName = message.content
+        .trim()
+        .substring(message.content.trim().indexOf(' ', config.PREFIX.length + 2))
+        .trim();
+      let song = await searchSong(message, songName);
       if (song.url !== null && song.title !== null) {
-        await queueAdd(message, song);
+        let finalSongDetails = { ...song, originalTitle: songName };
+        await queueAdd(message, finalSongDetails);
       }
     }
   } catch (error) {
@@ -72,7 +79,10 @@ const connection = async (message: Message) => {
   }
 };
 
-export const queueAdd = async (message, songData) => {
+export const queueAdd = async (
+  message,
+  songData: { title: string; url: string; originalTitle: string; artistName: string; timestamp: string },
+) => {
   let music = connectionMap.get(message.guild.id);
   music.queue.push(songData);
   if (music.queue.length - connectionMap.get(message.guild.id).currentSong === 1)
@@ -99,8 +109,8 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
       if (connectionMap.get(message.guild.id).timer) clearTimeout(connectionMap.get(message.guild.id).timer);
       msg = await message.channel.send(
         EMBED()
-          .setTitle(`${MESSAGES.SONG_START + song.title}`)
-          .setDescription(song.url),
+          .setThumbnail('')
+          .setDescription(`${MESSAGES.SONG_START + song.title} ${song.timestamp}`),
       );
     });
     dispatcher.on('finish', async () => {

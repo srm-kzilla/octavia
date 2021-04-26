@@ -44,7 +44,9 @@ const spotifyTrackHandler = async (message, id) => {
       headers: { Authorization: `Bearer ${await getSpotifyToken()}` },
     });
     if (!trackData.data.name) return message.channel.send('unable to add playlist');
-    await queueAdd(message, await searchSong(message, `${trackData.data.name} ${trackData.data.artists[0].name}`));
+    let songData = await searchSong(message, `${trackData.data.name} ${trackData.data.artists[0].name}`);
+    let finalSongDetails = { ...songData, originalTitle: trackData.data.name };
+    await queueAdd(message, finalSongDetails);
   } catch (error) {
     throw error;
   }
@@ -92,11 +94,14 @@ const spotifyPlaylistHandler = async (message, id, next?: string) => {
 const addSpotifyALbumSongsToQueue = async (message, songs) => {
   try {
     for (let i = 0; i < songs.length; i++) {
-      let url = await searchSong(message, `${songs[i].name} ${songs[i].artists[0].name}`);
-      if (url) {
+      let songData = await searchSong(message, `${songs[i].name} ${songs[i].artists[0].name}`);
+      if (songData) {
         queueAdd(message, {
           title: `${songs[i].name}`,
-          url: url.url,
+          url: songData.url,
+          originalTitle: songs[i].name,
+          timestamp: songData.timestamp,
+          artistName: songs[i].artists[0].name,
         });
       }
     }
@@ -108,11 +113,14 @@ const addSpotifyALbumSongsToQueue = async (message, songs) => {
 const addSpotifyPlaylistSongsToQueue = async (message, songs) => {
   try {
     for (let i = 0; i < songs.length; i++) {
-      let url = await searchSong(message, `${songs[i].track.name} ${songs[i].track.album.artists[0].name}`);
-      if (url) {
+      let songData = await searchSong(message, `${songs[i].track.name} ${songs[i].track.album.artists[0].name}`);
+      if (songData) {
         queueAdd(message, {
           title: `${songs[i].track.name}`,
-          url: url.url,
+          url: songData.url,
+          originalTitle: songs[i].track.name,
+          timestamp: songData.timestamp,
+          artistName: songs[i].track.album.artists[0].name,
         });
       }
     }

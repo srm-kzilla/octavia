@@ -30,6 +30,7 @@ export const COMMANDS = {
   LOOP: 'loop',
   SHUFFLE: 'shuffle',
   PREVIOUS: 'previous',
+  LYRICS: 'lyrics',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [

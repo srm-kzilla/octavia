@@ -9,3 +9,4 @@ export { resumeCommand as resumeCommandHandler } from './resume';
 export { loopCommand as loopCommandHandler } from './loop';
 export { shuffleCommand as shuffleCommandHandler } from './shuffle';
 export { previousCommand as previousCommandHandler } from './previous';
+export { lyricsCommand as lyricsCommandHandler } from './lyrics';

@@ -4,6 +4,7 @@ import {
   helpCommandHandler,
   leaveCommandHandler,
   loopCommandHandler,
+  lyricsCommandHandler,
   playCommandHandler,
   previousCommandHandler,
   puaseCommandHandler,
@@ -53,7 +54,10 @@ const discordHandler = async () => {
             shuffleCommandHandler(message);
             break;
           case COMMANDS.PREVIOUS:
-            previousCommandHandler(message);
+            await previousCommandHandler(message);
+            break;
+          case COMMANDS.LYRICS:
+            await lyricsCommandHandler(message);
             break;
           default:
             defaulCasetHandler(message);
