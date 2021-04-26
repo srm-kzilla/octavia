@@ -31,6 +31,7 @@ export default {
    */
   TOKEN: process.env.TOKEN,
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
+  GENIUS_API_KEY: process.env.GENIUS_API_KEY,
   /**
    * Used by Winston logger
    */
