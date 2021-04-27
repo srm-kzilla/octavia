@@ -17,6 +17,11 @@ export default {
    */
   THUMBNAIL: process.env.THUMBNAIL,
   /**
+   * KZILLA's guild ID and Custom emoji ID
+   */
+  KZILLA_GUILD_ID: process.env.KZILLA_GUILD_ID,
+  KZILLA_CUSTOM_EMOJI: process.env.KZILLA_CUSTOM_EMOJI,
+  /**
    * Database the app should connect to
    */
   PREFIX: process.env.PREFIX || '#kzjill',

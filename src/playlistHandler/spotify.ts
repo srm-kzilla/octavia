@@ -65,7 +65,7 @@ const spotifyAlbumHandler = async (message, id, next?: string) => {
     if (!albumData.data) return message.channel.send('unable to add playlist');
     await addSpotifyALbumSongsToQueue(message, albumData.data.items);
     if (albumData.data.next) {
-      spotifyAlbumHandler(message, id, albumData.data.next);
+      await spotifyAlbumHandler(message, id, albumData.data.next);
     }
   } catch (error) {
     throw error;
@@ -84,7 +84,7 @@ const spotifyPlaylistHandler = async (message, id, next?: string) => {
     if (!playlistData.data) return message.channel.send('unable to add playlist');
     await addSpotifyPlaylistSongsToQueue(message, playlistData.data.items);
     if (playlistData.data.next) {
-      spotifyPlaylistHandler(message, id, playlistData.data.next);
+      await spotifyPlaylistHandler(message, id, playlistData.data.next);
     }
   } catch (error) {
     throw error;

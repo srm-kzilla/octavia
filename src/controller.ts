@@ -37,10 +37,11 @@ export const playRequest = async message => {
           await queueAdd(message, finalSongDetails);
         }
       } else {
-        message.channel.send(MESSAGES.PLAYLIST_ADDED);
+        message.channel.send(EMBED().setDescription(MESSAGES.PLAYLIST_ADDED).setColor(COLOR_CODES.PLAYLIST_ADDED));
       }
     } else if (validateRegex(songUrl, REGEX.SPOTIFY_REGEX)) {
       await spotifyLinkHandler(message, songUrl);
+      message.channel.send(EMBED().setDescription(MESSAGES.SPOTIFY_URL_PLAYING).setColor(COLOR_CODES.PLAYLIST_ADDED));
     } else {
       let songName = message.content
         .trim()
@@ -109,12 +110,18 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
       if (connectionMap.get(message.guild.id).timer) clearTimeout(connectionMap.get(message.guild.id).timer);
       msg = await message.channel.send(
         EMBED()
-          .setThumbnail('')
-          .setDescription(`${MESSAGES.SONG_START + song.title} ${song.timestamp}`),
+          .setDescription(`🎶 **${MESSAGES.SONG_START}** [${song.originalTitle}](${song.url})     [${song.timestamp}]`)
+          .setColor(COLOR_CODES.PLAYING),
       );
     });
     dispatcher.on('finish', async () => {
-      (await message.channel.send(MESSAGES.SONG_OVER + ' ' + song.title)).delete({ timeout: 15000 });
+      (
+        await message.channel.send(
+          EMBED()
+            .setColor(COLOR_CODES.SONG_FINISHED_PLAYING)
+            .setDescription(`${MESSAGES.FINISHED_PLAYING} [${song.originalTitle}](${song.url})`),
+        )
+      ).delete({ timeout: 15000 });
       await msg.delete();
       connectionMap.get(message.guild.id).currentSong++;
       if (connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong > 0) {
@@ -138,10 +145,8 @@ const timer = async message => {
   try {
     let timer = setTimeout(async () => {
       await message.guild.me.voice.channel.leave();
-      message.channel.send(
-        EMBED().setColor(COLOR_CODES.LEAVE).setTitle(MESSAGES.LEAVE.TITLE).setDescription(MESSAGES.LEAVE.DESCRIPTION),
-      );
-    }, 15000);
+      message.channel.send(EMBED().setColor(COLOR_CODES.LEAVE).setDescription(MESSAGES.LEAVE.DESCRIPTION));
+    }, 45000);
     connectionMap.get(message.guild.id).timer = timer;
   } catch (error) {
     throw error;

@@ -15,9 +15,12 @@ export const lyricsCommand = async message => {
       message.channel.send(
         EMBED()
           .setThumbnail('')
-          .setDescription(`${lyrics.substring(0, 1900)} \n\n${MESSAGES.USE_FIND_LYRICS_COMMANDS}`),
+          .setDescription(`${lyrics.substring(0, 1900)}... \n\n${MESSAGES.USE_FIND_LYRICS_COMMANDS}`),
       );
-    else message.channel.send(EMBED().setThumbnail('').setDescription(lyrics));
+    else
+      message.channel.send(
+        EMBED().setThumbnail('').setDescription(`${lyrics}... \n\n${MESSAGES.USE_FIND_LYRICS_COMMANDS}`),
+      );
   } catch (error) {
     LoggerInstance.error(error.message);
     message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);

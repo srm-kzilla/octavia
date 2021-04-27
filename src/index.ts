@@ -31,7 +31,7 @@ const discordHandler = async () => {
             helpCommandHandler(message);
             break;
           case COMMANDS.PLAY:
-            playCommandHandler(message);
+            await playCommandHandler(message);
             break;
           case COMMANDS.LEAVE:
             leaveCommandHandler(message);
@@ -40,7 +40,7 @@ const discordHandler = async () => {
             queueCommandHandler(message);
             break;
           case COMMANDS.SKIP:
-            skipCommandHandler(message);
+            await skipCommandHandler(message);
             break;
           case COMMANDS.PAUSE:
             puaseCommandHandler(message);
@@ -49,7 +49,7 @@ const discordHandler = async () => {
             resumeCommandHandler(message);
             break;
           case COMMANDS.LOOP:
-            loopCommandHandler(message);
+            await loopCommandHandler(message);
             break;
           case COMMANDS.SHUFFLE:
             shuffleCommandHandler(message);
@@ -65,9 +65,10 @@ const discordHandler = async () => {
             break;
           default:
             defaulCasetHandler(message);
-            break;
+            return message.react(EMOJIS.REACTION_DEFAULT_CASE);
         }
-        await message.react(EMOJIS.REACTION_DEFAULT);
+        if (message.guild.id === config.KZILLA_GUILD_ID) await message.react(config.KZILLA_CUSTOM_EMOJI);
+        else await message.react(EMOJIS.REACTION_CORRECT_COMMAND);
       }
     });
   } catch (error) {
