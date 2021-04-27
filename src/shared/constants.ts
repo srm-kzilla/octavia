@@ -71,7 +71,7 @@ export const MESSAGES = {
   MUSIC_RESUME: '🎶 Music resumed! ▶',
   LEAVE: {
     TITLE: 'Leaving the channel!',
-    DESCRIPTION: `Hi, I am leaving the channel due to inactivity, but do not fret, you can play music again! Use ${config.PREFIX} ${COMMANDS.HELP} to see the list of my commands.`,
+    DESCRIPTION: `Hi, I am leaving 😔 the channel due to inactivity, but do not fret, you can play music again! 🙌\n\nUse **${config.PREFIX} ${COMMANDS.HELP}** to see the list of my commands. 📖`,
   },
   CANNOT_PLAY_PREVIOUS_SONG: 'There are no songs before the current song in the queue.',
   USE_FIND_LYRICS_COMMANDS: `Unsatisfied with the lyrics? Use **${config.PREFIX} ${COMMANDS.LYRICS_FIND} <song name>, <artist's name>** to get the lyrics of any song!`,
