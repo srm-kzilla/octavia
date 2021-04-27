@@ -31,6 +31,7 @@ export const COMMANDS = {
   SHUFFLE: 'shuffle',
   PREVIOUS: 'previous',
   LYRICS: 'lyrics',
+  LYRICS_FIND: 'findlyrics',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
@@ -46,7 +47,8 @@ export const ERROR_MESSAGES = {
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song.`,
   UNABLE_TO_SKIP: 'cannot skip, queue empty. Add songs and then then try skipping.',
   UNABLE_TO_FIND_PLAYLIST: 'Hi, I was unable to find the playlist, please check and try again.',
-  UNABLE_TO_FIND_LYRICS: 'Oooops! I was unable to find the lyrics. 😭',
+  UNABLE_TO_FIND_LYRICS: `Oooops! I was unable to find the lyrics. 😭 \nUse ${config.PREFIX} ${COMMANDS.LYRICS_FIND} song name, artist's name to get the lyrics of any song!`,
+  INCORRECT_SYNTAX: `Ooppss! You have used the wrong syntax. Use ${config.PREFIX} ${COMMANDS.HELP} to see the proper syntax.`,
 };
 
 export const MESSAGES = {
@@ -65,6 +67,12 @@ export const MESSAGES = {
     DESCRIPTION: `Hi, I am leaving the channel due to inactivity, but do not fret, you can play music again! Use ${config.PREFIX} ${COMMANDS.HELP} to see the list of my commands.`,
   },
   CANNOT_PLAY_PREVIOUS_SONG: 'There are no songs before the current song in the queue.',
+  USE_FIND_LYRICS_COMMANDS: `Unsatisfied with the lyrics? Use ${config.PREFIX} ${COMMANDS.LYRICS_FIND} song name, artist's name to get the lyrics of any song!`,
+  FETCHING_LYRICS: [
+    `Please wait while I fetch those lyrics for you...`,
+    `Keep humming the wrong lyrics while I fetch the correct lyrics!`,
+    `Please wait while I find the key to open the box which has the lyrics you need.`,
+  ],
 };
 
 export const REGEX = {

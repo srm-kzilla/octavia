@@ -5,6 +5,7 @@ import {
   leaveCommandHandler,
   loopCommandHandler,
   lyricsCommandHandler,
+  lyricsFindCommandHandler,
   playCommandHandler,
   previousCommandHandler,
   puaseCommandHandler,
@@ -58,6 +59,9 @@ const discordHandler = async () => {
             break;
           case COMMANDS.LYRICS:
             await lyricsCommandHandler(message);
+            break;
+          case COMMANDS.LYRICS_FIND:
+            await lyricsFindCommandHandler(message);
             break;
           default:
             defaulCasetHandler(message);
