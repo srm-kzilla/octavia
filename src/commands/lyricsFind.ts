@@ -1,5 +1,4 @@
 import config from '../config';
-import LoggerInstance from '../loaders/logger';
 import { EMBED, ERROR_MESSAGES, MESSAGES, randomNumber } from '../shared/constants';
 import { lyricsHelper } from '../shared/lyrics';
 
@@ -17,7 +16,6 @@ export const lyricsFindCommand = async message => {
     if (lyrics.length > 1900) message.channel.send(EMBED().setThumbnail('').setDescription(lyrics.substring(0, 2047)));
     else message.channel.send(EMBED().setThumbnail('').setDescription(lyrics));
   } catch (error) {
-    LoggerInstance.error(error.message);
-    message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
+    throw error;
   }
 };

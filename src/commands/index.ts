@@ -11,3 +11,4 @@ export { shuffleCommand as shuffleCommandHandler } from './shuffle';
 export { previousCommand as previousCommandHandler } from './previous';
 export { lyricsCommand as lyricsCommandHandler } from './lyrics';
 export { lyricsFindCommand as lyricsFindCommandHandler } from './lyricsFind';
+export { clearCommand as clearCommandHandler } from './clear';

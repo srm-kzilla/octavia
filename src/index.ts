@@ -19,12 +19,12 @@ import config from './config';
 import Loaders from './loaders';
 import discord from './loaders/discord';
 import LoggerInstance from './loaders/logger';
-import { COMMANDS, EMOJIS } from './shared/constants';
+import { COMMANDS, EMOJIS, ERROR_MESSAGES, randomNumber } from './shared/constants';
 
 const discordHandler = async () => {
-  try {
-    const client = await discord();
-    client.on('message', async (message: Message) => {
+  const client = await discord();
+  client.on('message', async (message: Message) => {
+    try {
       const messageArray = message.content.trim().split(' ');
       if (!message.author.bot && messageArray[0] === config.PREFIX) {
         switch (messageArray[1]) {
@@ -74,14 +74,15 @@ const discordHandler = async () => {
         if (message.guild.id === config.KZILLA_GUILD_ID) await message.react(config.KZILLA_CUSTOM_EMOJI);
         else await message.react(EMOJIS.REACTION_CORRECT_COMMAND);
       }
-    });
-  } catch (error) {
-    LoggerInstance.error(error.message);
-  }
+    } catch (error) {
+      LoggerInstance.error(error.message);
+      message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
+    }
+  });
 };
 
 async function startServer() {
   await Loaders();
-  discordHandler();
+  await discordHandler();
 }
 startServer();

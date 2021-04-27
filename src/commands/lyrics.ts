@@ -1,5 +1,4 @@
 import { connectionMap } from '../controller';
-import LoggerInstance from '../loaders/logger';
 import { EMBED, ERROR_MESSAGES, MESSAGES, randomNumber } from '../shared/constants';
 import { lyricsHelper } from '../shared/lyrics';
 
@@ -22,7 +21,6 @@ export const lyricsCommand = async message => {
         EMBED().setThumbnail('').setDescription(`${lyrics}... \n\n${MESSAGES.USE_FIND_LYRICS_COMMANDS}`),
       );
   } catch (error) {
-    LoggerInstance.error(error.message);
-    message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
+    throw error;
   }
 };
