@@ -8,6 +8,7 @@ export const clearCommand = message => {
       connectionMap.get(message.guild.id).dispatcher.destroy();
       connectionMap.get(message.guild.id).currentSong = 0;
       connectionMap.get(message.guild.id).queue = [];
+      connectionMap.get(message.guild.id).loop = false;
       message.channel.send(EMBED().setColor(COLOR_CODES.CLEAR).setDescription(MESSAGES.CLEAR_QUEUE));
     }
   } catch (error) {

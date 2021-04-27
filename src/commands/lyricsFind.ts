@@ -13,8 +13,8 @@ export const lyricsFindCommand = async message => {
     let lyrics = await lyricsHelper(songDetails[0], songDetails[1]);
     if (songDetails.length !== 2) return message.channel.send(ERROR_MESSAGES.INCORRECT_SYNTAX);
     if (!lyrics) return message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_LYRICS);
-    if (lyrics.length > 1900) message.channel.send(EMBED().setThumbnail('').setDescription(lyrics.substring(0, 2047)));
-    else message.channel.send(EMBED().setThumbnail('').setDescription(lyrics));
+    if (lyrics.length > 2040) message.channel.send(EMBED().setDescription(`${lyrics.substring(0, 2040)}...`));
+    else message.channel.send(EMBED().setDescription(lyrics));
   } catch (error) {
     throw error;
   }
