@@ -17,6 +17,7 @@ export const COLOR_CODES = {
   LOOP_ON: '#00cc99',
   PAUSE: '#e60000',
   RESUME: ' #00ff00',
+  CLEAR: '#ff5500',
 };
 
 export const randomNumber = (max: number) => {
@@ -35,6 +36,7 @@ export const COMMANDS = {
   PREVIOUS: 'previous',
   LYRICS: 'lyrics',
   LYRICS_FIND: 'findlyrics',
+  CLEAR_QUEUE: 'clear',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
@@ -81,6 +83,7 @@ export const MESSAGES = {
   SPOTIFY_URL_PLAYING: `Wooohooo! 🎊 I have successfully added the song(s) in the spotify URL to your queue! 🎼`,
   FINISHED_PLAYING: '🏁Finished playing:',
   SHUFFLE_MUSIC: '👀 I have shuffled the music in your queue! 🔀',
+  CLEAR_QUEUE: 'I have cleared the queue for you! 🧹',
 };
 
 export const REGEX = {

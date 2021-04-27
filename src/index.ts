@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import {
+  clearCommandHandler,
   defaulCasetHandler,
   helpCommandHandler,
   leaveCommandHandler,
@@ -62,6 +63,9 @@ const discordHandler = async () => {
             break;
           case COMMANDS.LYRICS_FIND:
             await lyricsFindCommandHandler(message);
+            break;
+          case COMMANDS.CLEAR_QUEUE:
+            clearCommandHandler(message);
             break;
           default:
             defaulCasetHandler(message);
