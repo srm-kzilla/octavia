@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import {
   clearCommandHandler,
-  defaulCasetHandler,
+  defaultCaseHandler,
   helpCommandHandler,
   leaveCommandHandler,
   loopCommandHandler,
@@ -9,7 +9,7 @@ import {
   lyricsFindCommandHandler,
   playCommandHandler,
   previousCommandHandler,
-  puaseCommandHandler,
+  pauseCommandHandler,
   queueCommandHandler,
   resumeCommandHandler,
   shuffleCommandHandler,
@@ -44,7 +44,7 @@ const discordHandler = async () => {
             await skipCommandHandler(message);
             break;
           case COMMANDS.PAUSE:
-            puaseCommandHandler(message);
+            pauseCommandHandler(message);
             break;
           case COMMANDS.RESUME:
             resumeCommandHandler(message);
@@ -68,7 +68,7 @@ const discordHandler = async () => {
             clearCommandHandler(message);
             break;
           default:
-            defaulCasetHandler(message);
+            defaultCaseHandler(message);
             return message.react(EMOJIS.REACTION_DEFAULT_CASE);
         }
         if (message.guild.id === config.KZILLA_GUILD_ID) await message.react(config.KZILLA_CUSTOM_EMOJI);

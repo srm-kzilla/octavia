@@ -7,8 +7,7 @@ export const EMBED = () => {
 
 export const COLOR_CODES = {
   WRONG_COMMAND_COLOR_CODE: '#ff0000',
-  HELP_COLOR_CODE: '#0066ff',
-  DEFAULT: '#008080',
+  DEFAULT: '#00ccff',
   LEAVE: '#ff1a75',
   PLAYING: '#1aff1a',
   PLAYLIST_ADDED: '#ff66cc',
@@ -53,9 +52,11 @@ export const ERROR_MESSAGES = {
   UNABLE_TO_FIND_A_MATCH: `Sorry, I couldn't find the song. 😥`,
   UNABLE_TO_SKIP: 'cannot skip, queue empty. Add songs and then then try skipping.',
   UNABLE_TO_FIND_PLAYLIST: 'Hi, I was unable to find the playlist, please check and try again. 😞',
-  UNABLE_TO_FIND_LYRICS: `Oooops! I was unable to find the lyrics. 😭 \nUse ${config.PREFIX} ${COMMANDS.LYRICS_FIND} song name, artist's name to get the lyrics of any song!`,
-  INCORRECT_SYNTAX: `Ooppss! You have used the wrong syntax. Use ${config.PREFIX} ${COMMANDS.HELP} to see the proper syntax. ☺`,
+  UNABLE_TO_FIND_LYRICS: `Oooops! I was unable to find the lyrics. 😭 \nUse **${config.PREFIX} ${COMMANDS.LYRICS_FIND} song name, artist's name** to get the lyrics of any song!`,
+  INCORRECT_SYNTAX: `Ooppss! You have used the wrong syntax. Use **${config.PREFIX} ${COMMANDS.HELP}** to see the proper syntax. ☺`,
   QUEUE_EMPTY: 'Oooopsss! The queue is empty, please add some songs and then try shuffling them! 😅',
+  ERROR_PlAYING_SONG:
+    'Oopsss! Something went wrong. Please add the current song again while I play the next song in the queue.',
 };
 
 export const MESSAGES = {

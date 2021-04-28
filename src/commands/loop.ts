@@ -3,7 +3,7 @@ import { connectionMap } from '../controller';
 import { userInVoiceChannelCheck } from '../shared/auth';
 import { COLOR_CODES, EMBED, MESSAGES } from '../shared/constants';
 
-export const loopCommand = (message: Message) => {
+export const loopCommandHandler = (message: Message) => {
   if (userInVoiceChannelCheck) {
     if (connectionMap.get(message.guild.id).loop === true) {
       connectionMap.get(message.guild.id).loop = false;
