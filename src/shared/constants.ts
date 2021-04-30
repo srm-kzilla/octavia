@@ -85,6 +85,11 @@ export const MESSAGES = {
   FINISHED_PLAYING: '🏁Finished playing:',
   SHUFFLE_MUSIC: '👀 I have shuffled the music in your queue! 🔀',
   CLEAR_QUEUE: 'I have cleared the queue for you! 🧹',
+  QUEUE_MESSAGE: {
+    index: '🔢 index   ',
+    song_name: '🔠 song name   ',
+    length: '⌛ duration   ',
+  },
 };
 
 export const REGEX = {

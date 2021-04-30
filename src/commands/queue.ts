@@ -1,61 +1,37 @@
 import { connectionMap } from '../controller';
 import { userInVoiceChannelCheck } from '../shared/auth';
-import { EMBED } from '../shared/constants';
+import { EMBED, MESSAGES } from '../shared/constants';
 
 export const queueCommandHandler = message => {
   if (userInVoiceChannelCheck(message)) {
     let arrayKeywords = message.content.trim().split(' ');
     if (arrayKeywords.length < 3) return message.channel.send(EMBED().setDescription(queueCurrentPage(message)));
     message.channel.send(EMBED().setDescription(queuePageHandler(message, arrayKeywords[2])));
-    // if (queueArray) {
-    //   if (queueArray.length < 12) {
-    //     for (let i = 0; i < queueArray.length; i++) {
-    //       if (i === connectionMap.get(message.guild.id).currentSong)
-    //         queueList =
-    //           queueList +
-    //           `**current song**=> [${queueArray[i].originalTitle}](${queueArray[i].url})       [${queueArray[i].timestamp}]\n`;
-    //       else
-    //         queueList =
-    //           queueList +
-    //           `**${i + 1}**=> [${queueArray[i].originalTitle}](${queueArray[i].url})      [${
-    //             queueArray[i].timestamp
-    //           }]\n`;
-    //     }
-    //   } else {
-    //     for (let i = 0; i < queueArray.length; i++) {
-    //       if (Math.abs(connectionMap.get(message.guild.id).currentSong - i) < 8) {
-    //         if (i === connectionMap.get(message.guild.id).currentSong)
-    //           queueList =
-    //             queueList +
-    //             `**current song**=> [${queueArray[i].originalTitle}](${queueArray[i].url})      [${queueArray[i].timestamp}]\n`;
-    //         else
-    //           queueList =
-    //             queueList +
-    //             `**${i + 1}**=> [${queueArray[i].originalTitle}](${queueArray[i].url})      [${
-    //               queueArray[i].timestamp
-    //             }] \n`;
-    //       }
-    //     }
-    //   }
-    //   message.channel.send(EMBED().setDescription(queueList).setTitle('You song queue:'));
-    // }
   }
 };
 
 const queueCurrentPage = message => {
-  let queueList = ``;
+  //5//25
+  let queueList = `\u3000**${MESSAGES.QUEUE_MESSAGE.index}**\u3000**${MESSAGES.QUEUE_MESSAGE.length}**\u3000**${MESSAGES.QUEUE_MESSAGE.song_name}**\n`;
   let queueArray = connectionMap.get(message.guild.id).queue;
   if (!queueArray) return;
   if (queueArray.length < 12) {
     queueArray.forEach((element, index) => {
       index;
       if (Math.abs(connectionMap.get(message.guild.id).currentSong - index) < 8) {
-        if (index === connectionMap.get(message.guild.id).currentSong)
+        if (index === connectionMap.get(message.guild.id).currentSong) {
+          if (element.originalTitle.length > 20) element.originalTitle = element.originalTitle.substring(0, 20) + '...';
           queueList =
-            queueList + `**current song**=> [${element.originalTitle}](${element.url})      [${element.timestamp}]\n`;
-        else
+            queueList +
+            `🎶\u3000${index + 1}\u3000\u3000\u3000\u3000[${
+              element.timestamp
+            }]\u3000\u3000[${element.originalTitle.concat('')}](${element.url})\u3000🎶 [The current song!]\n`;
+        } else
           queueList =
-            queueList + `**${index + 1}**=> [${element.originalTitle}](${element.url})      [${element.timestamp}] \n`;
+            queueList +
+            `\u3000\u3000**${index + 1}**\u3000\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000**[${
+              element.originalTitle
+            }](${element.url})**\n`;
       }
     });
     return queueList;
@@ -64,10 +40,13 @@ const queueCurrentPage = message => {
     if (Math.abs(connectionMap.get(message.guild.id).currentSong - index) < 8) {
       if (index === connectionMap.get(message.guild.id).currentSong)
         queueList =
-          queueList + `**current song**=> [${element.originalTitle}](${element.url})      [${element.timestamp}]\n`;
+          queueList + `🎶>>>>>>>[${element.timestamp}] [${element.originalTitle}](${element.url}) <<<<<<<🎶\n`;
       else
         queueList =
-          queueList + `**${index + 1}**=> [${element.originalTitle}](${element.url})      [${element.timestamp}] \n`;
+          queueList +
+          `\u3000\u3000**${index + 1}**\u3000\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000**[${
+            element.originalTitle
+          }](${element.url})**\n`;
     }
   });
   return queueList;
@@ -78,13 +57,13 @@ const queuePageHandler = (message, pageNumber) => {
   pageNumber = parseInt(pageNumber);
   if (isNaN(pageNumber)) return 'Not a valid pageNumber';
   if (pageNumber > pageArray.length) return 'Page does not exist!';
-  let queueList = ``;
+  let queueList = `\u3000**${MESSAGES.QUEUE_MESSAGE.index}**\u3000**${MESSAGES.QUEUE_MESSAGE.length}**\u3000**${MESSAGES.QUEUE_MESSAGE.song_name}**\n`;
   pageArray[pageNumber - 1].forEach((element, index) => {
     queueList =
       queueList +
-      `**${connectionMap.get(message.guild.id).queue.indexOf(element) + 1}** => [${element.originalTitle}](${
-        element.url
-      })      [${element.timestamp}] \n`;
+      `\u3000\u3000**${connectionMap.get(message.guild.id).queue.indexOf(element) + 1}**\u3000\u3000\u3000\u3000**[${
+        element.timestamp
+      }]**\u3000\u3000**[${element.originalTitle}](${element.url})**\n`;
   });
   return queueList;
 };
