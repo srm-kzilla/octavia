@@ -14,6 +14,13 @@ export let connectionMap = new Map();
 
 export const playRequest = async message => {
   try {
+    let arrayKeywords = message.content.trim().split(' ');
+    if (arrayKeywords.length < 3) {
+      if (connectionMap.get('message.guild.id')) return resumeCommandHandler(message);
+      return message.channel.send(
+        EMBED().setDescription(ERROR_MESSAGES.NO_SONG_URL_OR_KEYWORD).setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE),
+      );
+    }
     if (!message.guild.me.voice.channel) {
       let connection = await message.member.voice.channel.join();
       await connection.voice.setSelfDeaf(true);
@@ -26,8 +33,7 @@ export const playRequest = async message => {
       };
       connectionMap.set(message.guild.id, music);
     }
-    let arrayKeywords = message.content.trim().split(' ');
-    if (arrayKeywords.length < 3) return resumeCommandHandler(message);
+    if (arrayKeywords.length < 3) message.channel.send();
     let songUrl = arrayKeywords[2];
     if (validateRegex(songUrl, REGEX.YOUTUBE_REGEX)) {
       if (!(await playlistYoutube(message, songUrl))) {
