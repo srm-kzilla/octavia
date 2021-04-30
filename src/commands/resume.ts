@@ -1,10 +1,10 @@
 import { connectionMap } from '../controller';
 import { userInVoiceChannelCheck } from '../shared/auth';
-import { MESSAGES } from '../shared/constants';
+import { COLOR_CODES, EMBED, MESSAGES } from '../shared/constants';
 
-export const resumeCommand = message => {
+export const resumeCommandHandler = message => {
   if (userInVoiceChannelCheck(message)) {
     connectionMap.get(message.guild.id).dispatcher.resume();
-    message.channel.send(MESSAGES.MUSIC_RESUME);
+    message.channel.send(EMBED().setColor(COLOR_CODES.RESUME).setDescription(MESSAGES.MUSIC_RESUME));
   }
 };

@@ -17,6 +17,11 @@ export default {
    */
   THUMBNAIL: process.env.THUMBNAIL,
   /**
+   * KZILLA's guild ID and Custom emoji ID
+   */
+  KZILLA_GUILD_ID: process.env.KZILLA_GUILD_ID,
+  KZILLA_CUSTOM_EMOJI: process.env.KZILLA_CUSTOM_EMOJI,
+  /**
    * Database the app should connect to
    */
   PREFIX: process.env.PREFIX || '#kzjill',
@@ -31,6 +36,7 @@ export default {
    */
   TOKEN: process.env.TOKEN,
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
+  GENIUS_API_KEY: process.env.GENIUS_API_KEY,
   /**
    * Used by Winston logger
    */

@@ -1,6 +1,6 @@
 import { COLOR_CODES, EMBED, ERROR_MESSAGES } from '../shared/constants';
 
-export const defaultCase = message => {
+export const defaultCaseHandler = message => {
   message.channel.send(
     EMBED()
       .setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE)

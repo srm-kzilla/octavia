@@ -9,7 +9,7 @@ export const searchSong = async (message, song) => {
       message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_A_MATCH);
       return;
     }
-    return { title: data[0].title, url: data[0].url };
+    return { title: data[0].title, url: data[0].url, artistName: data[0].author.name, timestamp: data[0].timestamp };
   } catch (error) {
     LoggerInstance.error(error.message);
   }
@@ -22,7 +22,7 @@ export const searchTitle = async (message, song) => {
       message.channel.send(ERROR_MESSAGES.UNABLE_TO_FIND_A_MATCH);
       return;
     }
-    return data[0].title;
+    return { title: data[0].title, artistName: data[0].author.name, timestamp: data[0].timestamp };
   } catch (error) {
     LoggerInstance.error(error.message);
   }

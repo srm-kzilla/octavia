@@ -25,6 +25,7 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.8",
+    "genius-lyrics-api": "^3.0.6",
     "mongodb": "^3.6.2",
     "node-cache": "^5.1.2",
     "opusscript": "^0.0.8",
