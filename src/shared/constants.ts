@@ -57,6 +57,8 @@ export const ERROR_MESSAGES = {
   QUEUE_EMPTY: 'Oooopsss! The queue is empty, please add some songs and then try shuffling them! 😅',
   ERROR_PlAYING_SONG:
     'Oopsss! Something went wrong. Please add the current song again while I play the next song in the queue.',
+  INVALID_PAGE_NUMBER: 'Not a valid page number! 😓',
+  PAGE_DOES_NOT_EXIST: 'This page does not exist, try a lower page number.',
 };
 
 export const MESSAGES = {

@@ -1,6 +1,6 @@
 import { connectionMap } from '../controller';
 import { userInVoiceChannelCheck } from '../shared/auth';
-import { EMBED, MESSAGES } from '../shared/constants';
+import { EMBED, ERROR_MESSAGES, MESSAGES } from '../shared/constants';
 
 export const queueCommandHandler = message => {
   if (userInVoiceChannelCheck(message)) {
@@ -22,7 +22,7 @@ const queueCurrentPage = message => {
           if (element.originalTitle.length > 20) element.originalTitle = element.originalTitle.substring(0, 20) + '...';
           queueList =
             queueList +
-            `\u3000🎶🎶\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000\u3000[${element.originalTitle}](${element.url}) ▶\n`;
+            `\u3000🎶🎶\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000\u3000**[${element.originalTitle}](${element.url})**\n`;
         } else
           queueList =
             queueList +
@@ -34,12 +34,12 @@ const queueCurrentPage = message => {
     return queueList;
   }
   queueArray.forEach((element, index) => {
-    if (element.lenth > 20) element.originalTitle = element.originalTitle.substring(0, 20);
+    if (element.lenth > 20) element.originalTitle = element.originalTitle.substring(0, 20) + '...';
     if (Math.abs(connectionMap.get(message.guild.id).currentSong - index) < 8) {
       if (index === connectionMap.get(message.guild.id).currentSong)
         queueList =
           queueList +
-          `\u3000🎶🎶\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000\u3000[${element.originalTitle}](${element.url}) ▶\n`;
+          `\u3000🎶🎶\u3000\u3000\u3000**[${element.timestamp}]**\u3000\u3000\u3000**[${element.originalTitle}](${element.url})**\n`;
       else
         queueList =
           queueList +
@@ -54,8 +54,8 @@ const queueCurrentPage = message => {
 const queuePageHandler = (message, pageNumber) => {
   let pageArray = splitArray(connectionMap.get(message.guild.id).queue);
   pageNumber = parseInt(pageNumber);
-  if (isNaN(pageNumber)) return 'Not a valid pageNumber';
-  if (pageNumber > pageArray.length) return 'Page does not exist!';
+  if (isNaN(pageNumber)) return ERROR_MESSAGES.INVALID_PAGE_NUMBER;
+  if (pageNumber > pageArray.length) return ERROR_MESSAGES.PAGE_DOES_NOT_EXIST;
   let queueList = `\u3000**${MESSAGES.QUEUE_MESSAGE.index}**\u3000**${MESSAGES.QUEUE_MESSAGE.length}**\u3000**${MESSAGES.QUEUE_MESSAGE.song_name}**\n`;
   pageArray[pageNumber - 1].forEach((element, index) => {
     if (element.lenth > 20) element.originalTitle = element.originalTitle.substring(0, 20);
@@ -69,7 +69,7 @@ const queuePageHandler = (message, pageNumber) => {
 };
 
 const splitArray = queueArray => {
-  let pageSize = 10,
+  let pageSize = 9,
     pageArray = [];
   for (let index = 0; index < queueArray.length; index += pageSize) {
     pageArray.push(queueArray.slice(index, index + pageSize));
