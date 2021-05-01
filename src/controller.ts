@@ -55,6 +55,8 @@ export const playRequest = async message => {
     }
   } catch (error) {
     LoggerInstance.error(error.message);
+    if (error.code === 404)
+      return message.channel.send(EMBED().setDescription(error.message).setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE));
     message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
   }
 };
