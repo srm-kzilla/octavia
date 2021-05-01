@@ -14,6 +14,7 @@ import {
   resumeCommandHandler,
   shuffleCommandHandler,
   skipCommandHandler,
+  skiptoCommandHandler,
 } from './commands';
 import config from './config';
 import Loaders from './loaders';
@@ -66,6 +67,9 @@ const discordHandler = async () => {
             break;
           case COMMANDS.CLEAR_QUEUE:
             clearCommandHandler(message);
+            break;
+          case COMMANDS.SKIP_TO:
+            await skiptoCommandHandler(message);
             break;
           default:
             defaultCaseHandler(message);
