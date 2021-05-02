@@ -61,8 +61,9 @@ export const ERROR_MESSAGES = {
 
 export const MESSAGES = {
   PLAYLIST_ADDED: 'Your playlist has been added to the queue! 🎶',
-  HELP_TITLE: '',
-  HELP_DESCRIPTION: '',
+  HELP_TITLE: 'Hi! I am Jill, your favourite Music bot! 🤖',
+  HELP_DESCRIPTION:
+    'My lazy friends at **SRMKZILLA** want me to tell you that you can talk to me directly by first joining a voice channel and then using the following commands:',
   LEAVE_CHANNEL: 'I have left the voice channel on your Command! 💔',
   SONG_OVER: 'Finished playing: ',
   SONG_START: '💃🕺Now playing : ',
