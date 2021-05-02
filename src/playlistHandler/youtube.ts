@@ -1,7 +1,7 @@
 import { queueAdd } from '../controller';
 import { CONSTANT_URL, ERROR_MESSAGES } from '../shared/constants';
 import axios from 'axios';
-import { searchSong, searchTitle } from '../shared/yt-search';
+import { searchSong } from '../shared/yt-search';
 
 export const playlistYoutube = async (message, url: string, nextPageToken?: string) => {
   if (!(url.indexOf('list=') > 5)) return false;
