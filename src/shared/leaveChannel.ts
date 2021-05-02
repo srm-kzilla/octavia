@@ -9,17 +9,18 @@ export const setTimer = async message => {
   connectionMap.get(message.guild.id).timer = timer;
 };
 
-export const membersInVoiceChannelCounter = (members, guildID) => {
-  connectionMap.get(guildID).memberCount = 0;
+export const membersInVoiceChannelCounter = (members, guild) => {
+  connectionMap.get(guild.id).memberCount = 0;
   members.forEach(element => {
-    if (!element.user.bot) connectionMap.get(guildID).memberCount++;
+    if (!element.user.bot) connectionMap.get(guild.id).memberCount++;
   });
-  console.log(connectionMap.get(guildID).memberCount);
+  if (connectionMap.get(guild.id).memberCount === 0) leaveIfChannelEmpty(guild);
 };
 
-export const leaveIfChannelEmpty = message => {
-  message.channel.send('This channel is empty. i will leave the channel in 15 seconds if you do not join!');
+const leaveIfChannelEmpty = guild => {
+  let textChannel = connectionMap.get(guild.id).textChannel;
+  textChannel.send(EMBED().setColor(COLOR_CODES.LEAVE).setDescription(MESSAGES.LEAVE_EMPTY));
   setTimeout(() => {
-    if (connectionMap.get(message.guild.id).memberCount < 1) message.guild.me.voice.channel.leave();
+    if (connectionMap.get(guild.id).memberCount < 1 && guild.me.voice.channel) guild.me.voice.channel.leave();
   }, 15000);
 };

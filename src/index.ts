@@ -30,7 +30,7 @@ const discordHandler = async () => {
       const messageArray = message.content.trim().split(' ');
       if (!message.author.bot && messageArray[0] === config.PREFIX) {
         if (message.guild.me.voice.channel)
-          membersInVoiceChannelCounter(message.guild.voice.channel.members, message.guild.id);
+          membersInVoiceChannelCounter(message.guild.voice.channel.members, message.guild);
         switch (messageArray[1]) {
           case COMMANDS.HELP:
             helpCommandHandler(message);
@@ -86,9 +86,9 @@ const discordHandler = async () => {
   client.on('voiceStateUpdate', (oldState, newState) => {
     if (newState.guild.me.voice.channel && connectionMap.get(newState.guild.id))
       if (oldState.channelID === oldState.guild.me.voice.channelID && oldState.channel)
-        membersInVoiceChannelCounter(oldState.channel.members, oldState.guild.id);
+        membersInVoiceChannelCounter(oldState.channel.members, oldState.guild);
       else if (newState.channelID === newState.guild.me.voice.channelID && newState.channel)
-        membersInVoiceChannelCounter(newState.channel.members, newState.guild.id);
+        membersInVoiceChannelCounter(newState.channel.members, newState.guild);
   });
 };
 
