@@ -9,10 +9,11 @@ import { playlistYoutube } from './playlistHandler/youtube';
 import { validateRegex } from './shared/validation';
 import { searchSong, searchTitle } from './shared/yt-search';
 import config from './config';
+import { leaveIfChannelEmpty, setTimer } from './shared/leaveChannel';
 
 export let connectionMap = new Map();
 
-export const playRequest = async message => {
+export const playRequest = async (message: Message) => {
   try {
     if (!message.guild.me.voice.channel) {
       let connection = await message.member.voice.channel.join();
@@ -23,6 +24,7 @@ export const playRequest = async message => {
         guildID: message.guild.id,
         currentSong: 0,
         loop: false,
+        memberCount: 0,
       };
       connectionMap.set(message.guild.id, music);
     }
@@ -69,6 +71,7 @@ const connection = async (message: Message) => {
       guildID: message.guild.id,
       currentSong: 0,
       loop: false,
+      memberCount: 0,
     };
     connectionMap.set(message.guild.id, music);
   }
@@ -103,6 +106,7 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
   let msg: Message;
   dispatcher.on('start', async () => {
     if (connectionMap.get(message.guild.id).timer) clearTimeout(connectionMap.get(message.guild.id).timer);
+    if (connectionMap.get(message.guild.id).memberCount < 1) leaveIfChannelEmpty(message);
     msg = await message.channel.send(
       EMBED()
         .setDescription(`🎶 **${MESSAGES.SONG_START}** [${song.originalTitle}](${song.url})     [${song.timestamp}]`)
@@ -120,23 +124,21 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
     await msg.delete();
     connectionMap.get(message.guild.id).currentSong++;
     if (connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong > 0) {
-      playUrl(message, connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong]);
+      await playUrl(
+        message,
+        connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong],
+      );
     }
     if (
       connectionMap.get(message.guild.id).queue.length - connectionMap.get(message.guild.id).currentSong === 0 &&
       connectionMap.get(message.guild.id).loop === true
     ) {
       connectionMap.get(message.guild.id).currentSong = 0;
-      playUrl(message, connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong]);
+      await playUrl(
+        message,
+        connectionMap.get(message.guild.id).queue[connectionMap.get(message.guild.id).currentSong],
+      );
     }
-    await timer(message);
+    await setTimer(message);
   });
-};
-
-const timer = async message => {
-  let timer = setTimeout(async () => {
-    await message.guild.me.voice.channel.leave();
-    message.channel.send(EMBED().setColor(COLOR_CODES.LEAVE).setDescription(MESSAGES.LEAVE.DESCRIPTION));
-  }, 45000);
-  connectionMap.get(message.guild.id).timer = timer;
 };
