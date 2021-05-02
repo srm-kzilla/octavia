@@ -8,4 +8,5 @@ export type Play = {
   currentSong: number;
   loop: boolean;
   timer?: NodeJS.Timeout;
+  memberCount: number;
 };

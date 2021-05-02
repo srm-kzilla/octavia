@@ -6,8 +6,8 @@ let client: Client;
 
 async function initializeClient(): Promise<Client> {
   let intents = new Intents(Intents.NON_PRIVILEGED);
-  intents.add('GUILD_MEMBERS');
-  client = new Discord.Client({ ws: { intents: intents } });
+  intents.add(['GUILD_MEMBERS', 'GUILD_PRESENCES']);
+  client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'], ws: { intents: intents } });
   client.login(config.TOKEN);
   client.on('ready', () => {
     LoggerInstance.info(`Bot Id: ${client.user.tag}`);
