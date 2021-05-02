@@ -85,6 +85,7 @@ export const MESSAGES = {
   FINISHED_PLAYING: '🏁Finished playing:',
   SHUFFLE_MUSIC: '👀 I have shuffled the music in your queue! 🔀',
   CLEAR_QUEUE: 'I have cleared the queue for you! 🧹',
+  LEAVE_EMPTY: 'Since the channel is empty, I will be leaving it in a few seconds unless you join! 🙋‍♀️🙋‍♂️',
 };
 
 export const REGEX = {

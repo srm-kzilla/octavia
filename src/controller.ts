@@ -1,7 +1,7 @@
 import LoggerInstance from './loaders/logger';
 import { COLOR_CODES, EMBED, ERROR_MESSAGES, MESSAGES, randomNumber, REGEX } from './shared/constants';
 import ytdl from 'ytdl-core';
-import { Message, StreamDispatcher } from 'discord.js';
+import { Message, StreamDispatcher, TextChannel } from 'discord.js';
 import { Play } from './shared/customTypes';
 import { resumeCommandHandler, skipCommandHandler } from './commands';
 import { spotifyLinkHandler } from './playlistHandler/spotify';
@@ -9,7 +9,7 @@ import { playlistYoutube } from './playlistHandler/youtube';
 import { validateRegex } from './shared/validation';
 import { searchSong, searchTitle } from './shared/yt-search';
 import config from './config';
-import { leaveIfChannelEmpty, setTimer } from './shared/leaveChannel';
+import { setTimer } from './shared/leaveChannel';
 
 export let connectionMap = new Map();
 
@@ -25,6 +25,7 @@ export const playRequest = async (message: Message) => {
         currentSong: 0,
         loop: false,
         memberCount: 0,
+        textChannel: message.channel as TextChannel,
       };
       connectionMap.set(message.guild.id, music);
     }
@@ -72,6 +73,7 @@ const connection = async (message: Message) => {
       currentSong: 0,
       loop: false,
       memberCount: 0,
+      textChannel: message.channel as TextChannel,
     };
     connectionMap.set(message.guild.id, music);
   }
@@ -106,7 +108,6 @@ const dispatcherControl = async (message: Message, dispatcher, song) => {
   let msg: Message;
   dispatcher.on('start', async () => {
     if (connectionMap.get(message.guild.id).timer) clearTimeout(connectionMap.get(message.guild.id).timer);
-    if (connectionMap.get(message.guild.id).memberCount < 1) leaveIfChannelEmpty(message);
     msg = await message.channel.send(
       EMBED()
         .setDescription(`🎶 **${MESSAGES.SONG_START}** [${song.originalTitle}](${song.url})     [${song.timestamp}]`)

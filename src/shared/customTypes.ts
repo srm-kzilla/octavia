@@ -1,4 +1,4 @@
-import { StreamDispatcher, VoiceConnection } from 'discord.js';
+import { StreamDispatcher, TextChannel, VoiceConnection } from 'discord.js';
 
 export type Play = {
   connection: VoiceConnection;
@@ -9,4 +9,5 @@ export type Play = {
   loop: boolean;
   timer?: NodeJS.Timeout;
   memberCount: number;
+  textChannel: TextChannel;
 };
