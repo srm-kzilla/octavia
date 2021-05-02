@@ -13,14 +13,14 @@ export const skiptoCommandHandler = async message => {
     if (isNaN(arrayKeywords[2]))
       return message.channel.send(
         EMBED()
-          .setDescription(ERROR_MESSAGES.SKIP_TP_ERROR.NOT_A_NUMBER)
+          .setDescription(ERROR_MESSAGES.SKIP_TO_ERROR.NOT_A_NUMBER)
           .setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE),
       );
     if (arrayKeywords[2] >= connectionMap.get(message.guild.id).queue.length)
       return message.channel.send(
         EMBED()
           .setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE)
-          .setDescription(ERROR_MESSAGES.SKIP_TP_ERROR.NOT_IN_QUEUE),
+          .setDescription(ERROR_MESSAGES.SKIP_TO_ERROR.NOT_IN_QUEUE),
       );
     await playUrl(message, connectionMap.get(message.guild.id).queue[--arrayKeywords[2]]);
   }
