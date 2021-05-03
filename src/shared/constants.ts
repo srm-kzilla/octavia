@@ -36,6 +36,8 @@ export const COMMANDS = {
   LYRICS: 'lyrics',
   LYRICS_FIND: 'findlyrics',
   CLEAR_QUEUE: 'clear',
+  SKIP_TO: 'skipto',
+  NEXT: 'next',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
@@ -59,6 +61,10 @@ export const ERROR_MESSAGES = {
     'Oopsss! Something went wrong. Please add the current song again while I play the next song in the queue.',
   INVALID_PAGE_NUMBER: 'Not a valid page number! 😓',
   PAGE_DOES_NOT_EXIST: 'This page does not exist, try a lower page number.',
+  SKIP_TO_ERROR: {
+    NOT_A_NUMBER: 'This is not a valid song index! 🙃',
+    NOT_IN_QUEUE: 'This song does not exist in the queue! 🤨',
+  },
 };
 
 export const MESSAGES = {
@@ -92,6 +98,7 @@ export const MESSAGES = {
     song_name: '🔠 song name   ',
     length: '⌛ duration   ',
   },
+  LEAVE_EMPTY: 'Since the channel is empty, I will be leaving it in a few seconds unless you join! 🙋‍♀️🙋‍♂️',
 };
 
 export const REGEX = {
