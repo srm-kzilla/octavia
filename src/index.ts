@@ -14,6 +14,7 @@ import {
   resumeCommandHandler,
   shuffleCommandHandler,
   skipCommandHandler,
+  skiptoCommandHandler,
 } from './commands';
 import config from './config';
 import { connectionMap } from './controller';
@@ -71,6 +72,8 @@ const discordHandler = async () => {
           case COMMANDS.CLEAR_QUEUE:
             clearCommandHandler(message);
             break;
+          case COMMANDS.SKIP_TO:
+            await skiptoCommandHandler(message);
           case COMMANDS.NEXT:
             skipCommandHandler(message);
             break;

@@ -12,3 +12,4 @@ export { previousCommandHandler } from './previous';
 export { lyricsCommandHandler } from './lyrics';
 export { lyricsFindCommandHandler } from './lyricsFind';
 export { clearCommandHandler } from './clear';
+export { skiptoCommandHandler } from './skipto';

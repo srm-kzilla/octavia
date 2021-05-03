@@ -36,6 +36,7 @@ export const COMMANDS = {
   LYRICS: 'lyrics',
   LYRICS_FIND: 'findlyrics',
   CLEAR_QUEUE: 'clear',
+  SKIP_TO: 'skipto',
   NEXT: 'next',
 };
 export const ERROR_MESSAGES = {
@@ -58,6 +59,10 @@ export const ERROR_MESSAGES = {
   QUEUE_EMPTY: 'Oooopsss! The queue is empty, please add some songs and then try shuffling them! 😅',
   ERROR_PlAYING_SONG:
     'Oopsss! Something went wrong. Please add the current song again while I play the next song in the queue.',
+  SKIP_TO_ERROR: {
+    NOT_A_NUMBER: 'This is not a valid song index! 🙃',
+    NOT_IN_QUEUE: 'This song does not exist in the queue! 🤨',
+  },
 };
 
 export const MESSAGES = {
