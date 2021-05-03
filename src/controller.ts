@@ -36,7 +36,6 @@ export const playRequest = async (message: Message) => {
       };
       connectionMap.set(message.guild.id, music);
     }
-    if (arrayKeywords.length < 3) message.channel.send();
     let songUrl = arrayKeywords[2];
     if (validateRegex(songUrl, REGEX.YOUTUBE_REGEX)) {
       if (!(await playlistYoutube(message, songUrl))) {
