@@ -14,12 +14,15 @@ import {
   resumeCommandHandler,
   shuffleCommandHandler,
   skipCommandHandler,
+  skiptoCommandHandler,
 } from './commands';
 import config from './config';
+import { connectionMap } from './controller';
 import Loaders from './loaders';
 import discord from './loaders/discord';
 import LoggerInstance from './loaders/logger';
 import { COMMANDS, EMOJIS, ERROR_MESSAGES, randomNumber } from './shared/constants';
+import { membersInVoiceChannelCounter } from './shared/leaveChannel';
 
 const discordHandler = async () => {
   const client = await discord();
@@ -27,6 +30,8 @@ const discordHandler = async () => {
     try {
       const messageArray = message.content.trim().split(' ');
       if (!message.author.bot && messageArray[0] === config.PREFIX) {
+        if (message.guild.me.voice.channel)
+          membersInVoiceChannelCounter(message.guild.voice.channel.members, message.guild);
         switch (messageArray[1]) {
           case COMMANDS.HELP:
             helpCommandHandler(message);
@@ -67,6 +72,11 @@ const discordHandler = async () => {
           case COMMANDS.CLEAR_QUEUE:
             clearCommandHandler(message);
             break;
+          case COMMANDS.SKIP_TO:
+            await skiptoCommandHandler(message);
+          case COMMANDS.NEXT:
+            skipCommandHandler(message);
+            break;
           default:
             defaultCaseHandler(message);
             return message.react(EMOJIS.REACTION_DEFAULT_CASE);
@@ -78,6 +88,13 @@ const discordHandler = async () => {
       LoggerInstance.error(error.message);
       message.channel.send(ERROR_MESSAGES.UNKNOWN_ERROR[randomNumber(ERROR_MESSAGES.UNKNOWN_ERROR.length)]);
     }
+  });
+  client.on('voiceStateUpdate', (oldState, newState) => {
+    if (newState.guild.me.voice.channel && connectionMap.get(newState.guild.id))
+      if (oldState.channelID === oldState.guild.me.voice.channelID && oldState.channel)
+        membersInVoiceChannelCounter(oldState.channel.members, oldState.guild);
+      else if (newState.channelID === newState.guild.me.voice.channelID && newState.channel)
+        membersInVoiceChannelCounter(newState.channel.members, newState.guild);
   });
 };
 
