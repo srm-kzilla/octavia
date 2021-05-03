@@ -31,7 +31,7 @@ const addPlaylistSongToQueue = async (list, message) => {
       let songData = await searchSong(message, list.data.items[i].snippet.title);
       queueAdd(message, {
         ...songData,
-        title: `${list.data.items[i].snippet.title}`,
+        title: list.data.items[i].snippet.title,
         url: CONSTANT_URL.SONG_URL(list.data.items[i].contentDetails.videoId),
         originalTitle: `${list.data.items[i].snippet.title}`,
       });

@@ -95,7 +95,7 @@ const addSpotifyPlaylistSongsToQueue = async (message, songs) => {
     let songData = await searchSong(message, `${songs[i].track.name} ${songs[i].track.album.artists[0].name}`);
     if (songData) {
       queueAdd(message, {
-        title: `${songs[i].track.name}`,
+        title: songs[i].track.name,
         url: songData.url,
         originalTitle: songs[i].track.name,
         timestamp: songData.timestamp,
