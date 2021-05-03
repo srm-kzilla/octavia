@@ -67,6 +67,9 @@ const discordHandler = async () => {
           case COMMANDS.CLEAR_QUEUE:
             clearCommandHandler(message);
             break;
+          case COMMANDS.NEXT:
+            skipCommandHandler(message);
+            break;
           default:
             defaultCaseHandler(message);
             return message.react(EMOJIS.REACTION_DEFAULT_CASE);

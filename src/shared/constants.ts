@@ -36,6 +36,7 @@ export const COMMANDS = {
   LYRICS: 'lyrics',
   LYRICS_FIND: 'findlyrics',
   CLEAR_QUEUE: 'clear',
+  NEXT: 'next',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
