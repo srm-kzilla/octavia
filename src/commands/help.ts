@@ -45,6 +45,26 @@ export const helpCommandHandler = (message: Message) => {
           name: '`' + `${config.PREFIX} ${COMMANDS.SKIP}` + '`',
           value: `Ahhh, this song sucks. Skip it!`,
         },
+        {
+          name: '`' + `${config.PREFIX} ${COMMANDS.SKIP_TO} <song's index>` + '`',
+          value: `Well, want to jump to another song? Use me! 😎`,
+        },
+        {
+          name: '`' + `${config.PREFIX} ${COMMANDS.PREVIOUS}` + '`',
+          value: `Some songs are so good that you want to go back and listen to again to absord the greatness, and I have got you covered! 😘`,
+        },
+        {
+          name: '`' + `${config.PREFIX} ${COMMANDS.QUEUE}` + '`',
+          value: `Want to see the songs in your queue? I got you coverend! Trying to figure out why "queue" isn't written as "q"? Let me know once you find the answer! 🕵️‍♂️🕵️‍♀️`,
+        },
+        {
+          name: '`' + `${config.PREFIX} ${COMMANDS.QUEUE} <page number>` + '`',
+          value: `Enter a page number and I'll fetch that for ya matie! 🏴‍☠️`,
+        },
+        {
+          name: '`' + `${config.PREFIX} ${COMMANDS.CLEAR_QUEUE}` + '`',
+          value: `Pheww, that person with the weird music taste just left. Clear the queue and start afresh! 😂`,
+        },
       ),
   );
 };
