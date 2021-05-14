@@ -3,6 +3,7 @@ import { EMBED, ERROR_MESSAGES, MESSAGES, randomNumber } from '../shared/constan
 import { lyricsHelper } from '../shared/lyrics';
 
 export const lyricsFindCommandHandler = async message => {
+  if (message.content.trim().split(' ').length < 3) return message.channel.send(ERROR_MESSAGES.INCORRECT_SYNTAX);
   message.channel.send(MESSAGES.FETCHING_LYRICS[randomNumber(MESSAGES.FETCHING_LYRICS.length)]);
   let songDetails = message.content
     .trim()
