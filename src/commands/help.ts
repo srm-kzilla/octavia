@@ -63,7 +63,7 @@ export const helpCommandHandler = (message: Message) => {
         },
         {
           name: '`' + `${config.PREFIX} ${COMMANDS.CLEAR_QUEUE}` + '`',
-          value: `Pheww, that person with the weird music taste just left. Clear the queue and start afresh! 😂`,
+          value: `Pheww, that person with the weird music taste just left. Clear the queue and start afresh! 🥰`,
         },
       ),
   );
