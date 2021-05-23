@@ -27,7 +27,7 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on th
 - **Commands**
 
   - **`#kzjill help` - Get everything what Jill can do**
-  - **`#kzjill play <song's name or youtube link or spotify link>` - Play your favourite songs**
+  - **`#kzjill play <song's name or youtube link(playlist or just a song) or spotify link>` - Play your favourite songs**
   - **`#kzjill pause` - Pause the music!**
   - **`#kzjill resume` - Resume the song**
   - **`#kzjill lyrics ` - Find the lyrics of the song you are playing.**
