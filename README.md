@@ -27,11 +27,11 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on th
 - **Commands**
 
   - **`#kzjill help` - Get everything what Jill can do**
-  - **`#kzjill play <music>` - Play your favourite songs**
+  - **`#kzjill play <song's name or youtube link or spotify link>` - Play your favourite songs**
   - **`#kzjill pause` - Pause the music!**
   - **`#kzjill resume` - Resume the song**
   - **`#kzjill lyrics ` - Find the lyrics of the song you are playing.**
-  - **`#kzjill findLyrics <song name> , <artist's name>` - Use this to find the lyrics of any song**
+  - **`#kzjill findLyrics <song's name> , <artist's name>` - Use this to find the lyrics of any song**
   - **`#kzjill stop` - Stop the song**
   - **`#kzjill queue` - Get the current queue.**
   - **`#kzjill queue <page number>` - Get a specific queue page.**
