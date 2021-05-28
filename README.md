@@ -22,7 +22,7 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on th
 
 ## Commands 🔧
 
-> There's only so much Jill can do without you giving him further instructions
+> There's only so much Jill can do without you giving her further instructions
 
 - **Commands**
 
