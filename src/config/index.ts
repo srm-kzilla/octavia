@@ -6,7 +6,6 @@ export default {
   /**
    * Database the app should connect to
    */
-  EMBED_FOOTER: process.env.EMBED_FOOTER || 'by the SRMKZILLA team',
   /**
    * spotify client id
    */
@@ -15,12 +14,11 @@ export default {
   /**
    * Database the app should connect to
    */
-  THUMBNAIL: process.env.THUMBNAIL,
+
   /**
    * KZILLA's guild ID and Custom emoji ID
    */
   KZILLA_GUILD_ID: process.env.KZILLA_GUILD_ID,
-  KZILLA_CUSTOM_EMOJI: process.env.KZILLA_CUSTOM_EMOJI,
   /**
    * Database the app should connect to
    */

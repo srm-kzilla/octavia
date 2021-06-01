@@ -1,11 +1,11 @@
 import { Message } from 'discord.js';
 import config from '../config';
-import { COMMANDS, EMBED, MESSAGES } from '../shared/constants';
+import { COMMANDS, CONSTANT_URL, EMBED, MESSAGES } from '../shared/constants';
 
 export const helpCommandHandler = (message: Message) => {
   message.channel.send(
     EMBED()
-      .setThumbnail(config.THUMBNAIL)
+      .setThumbnail(CONSTANT_URL.JILL_THUMBNAIL)
       .setTitle(MESSAGES.HELP_TITLE)
       .setDescription(MESSAGES.HELP_DESCRIPTION)
       .addFields(

@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import config from '../config';
 
 export const EMBED = () => {
-  return new MessageEmbed().setTimestamp().setFooter(config.EMBED_FOOTER).setColor(COLOR_CODES.DEFAULT);
+  return new MessageEmbed().setTimestamp().setFooter('Made with 🧡 by SRMKZILLA!').setColor(COLOR_CODES.DEFAULT);
 };
 
 export const COLOR_CODES = {
@@ -112,9 +112,11 @@ export const REGEX = {
 export const EMOJIS = {
   REACTION_DEFAULT_CASE: '❌',
   REACTION_CORRECT_COMMAND: '🎵',
+  KZILLA_CUSTOM_EMOJI: '💖',
 };
 
 export const CONSTANT_URL = {
+  JILL_THUMBNAIL: 'https://cdn.discordapp.com/attachments/815937266777325618/825810924522700830/0.jpg',
   SPOTIFY_TOKEN: `https://accounts.spotify.com/api/token`,
   YOUTUBE_API: (listID, nextPageToken) => {
     if (!nextPageToken)
