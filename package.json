@@ -34,6 +34,6 @@
     "yt-search": "^2.7.5",
     "ytdl-core": "^4.8.0"
   },
-  "author": "SRMKZILLA",
-  "license": ""
+  "author": "SRMKZILLA <technical@srmkzilla.net>",
+  "license": "MIT"
 }
