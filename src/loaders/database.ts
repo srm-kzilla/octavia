@@ -3,6 +3,10 @@ import config from '../config';
 
 let db: Db;
 
+/**
+ * Return a Db instance after connecting to MongoDB
+ * @returns {Promise<Db>} Return Db instance
+ */
 async function initializeClient(): Promise<Db> {
   const client = await MongoClient.connect(config.databaseURL, {
     useNewUrlParser: true,
