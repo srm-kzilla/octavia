@@ -1,4 +1,5 @@
 import { Message } from 'discord.js';
+
 import {
   clearCommandHandler,
   defaultCaseHandler,
@@ -24,6 +25,9 @@ import LoggerInstance from './loaders/logger';
 import { COMMANDS, EMOJIS, ERROR_MESSAGES, randomNumber } from './shared/constants';
 import { membersInVoiceChannelCounter } from './shared/leaveChannel';
 
+/**
+ * Handle the various commands
+ */
 const discordHandler = async () => {
   const client = await discord();
   client.on('message', async (message: Message) => {
@@ -98,6 +102,9 @@ const discordHandler = async () => {
   });
 };
 
+/**
+ * Load the utilities and start the main handler
+ */
 async function startServer() {
   await Loaders();
   await discordHandler();

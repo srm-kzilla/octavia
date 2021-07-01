@@ -13,6 +13,10 @@ async function initializeClient(): Promise<Db> {
   return client.db();
 }
 
+/**
+ * Return a db instance (initialize if no instance is active)
+ * @returns {Db} A MongoDB instance
+ */
 export default async (): Promise<Db> => {
   if (!db) {
     db = await initializeClient();
