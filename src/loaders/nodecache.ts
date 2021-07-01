@@ -3,7 +3,12 @@ import LoggerInstance from './logger';
 import { spotifyGetToken } from './spotify';
 
 let cache: nodecache;
-const initCache = async () => {
+
+/**
+ * Return a node cache instance
+ * @returns {Promise<nodecache>}
+ */
+const initCache = async (): Promise<nodecache> => {
   try {
     cache = new nodecache();
     LoggerInstance.info(`✅ cache initialized`);
@@ -13,7 +18,10 @@ const initCache = async () => {
   }
 };
 
-const setSpotifyToken = async () => {
+/**
+ * Set token in node cache
+ */
+const setSpotifyToken = async (): Promise<void> => {
   try {
     if (!cache) await initCache();
     let tokenData = await spotifyGetToken();
@@ -23,13 +31,18 @@ const setSpotifyToken = async () => {
     throw err;
   }
 };
-export const getSpotifyToken = async () => {
+
+/**
+ * Return Spotify token from cache
+ * @returns {Promise<string>} Spotify token
+ */
+export const getSpotifyToken = async (): Promise<string> => {
   try {
     if (!cache) await initCache();
     if (!cache.get('spotify')) {
       await setSpotifyToken();
     }
-    return cache.get('spotify');
+    return cache.get('spotify') as string;
   } catch (err) {
     LoggerInstance.error(err.message);
   }

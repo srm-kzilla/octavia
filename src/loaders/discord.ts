@@ -4,6 +4,10 @@ import LoggerInstance from './logger';
 
 let client: Client;
 
+/**
+ * Return a Discord client instance
+ * @returns {Promise<Client>} Return a client instance
+ */
 async function initializeClient(): Promise<Client> {
   let intents = new Intents(Intents.NON_PRIVILEGED);
   intents.add(['GUILD_MEMBERS', 'GUILD_PRESENCES']);
@@ -18,6 +22,10 @@ async function initializeClient(): Promise<Client> {
   return client;
 }
 
+/**
+ * Return a Discord Client, or initiate one if not present
+ * @returns {Promise<Client>} Return a Discord client instance
+ */
 export default async (): Promise<Client> => {
   if (!client) {
     client = await initializeClient();
