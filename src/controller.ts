@@ -17,7 +17,7 @@ export const playRequest = async (message: Message) => {
   try {
     let arrayKeywords = message.content.trim().split(' ');
     if (arrayKeywords.length < 3) {
-      if (connectionMap.get('message.guild.id')) return resumeCommandHandler(message);
+      if (connectionMap.get(message.guild.id)) return resumeCommandHandler(message);
       return message.channel.send(
         EMBED().setDescription(ERROR_MESSAGES.NO_SONG_URL_OR_KEYWORD).setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE),
       );
