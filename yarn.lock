@@ -2881,7 +2881,7 @@ yt-search@^2.7.5:
     minimist "~1.2.5"
     node-fzf "~0.5.1"
 
-ytdl-core@^4.8.0:
+ytdl-core@^4.8.2:
   version "4.8.3"
   resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-4.8.3.tgz#21570d1834db13dec7828cf87bbf4c83c0fe68d7"
   integrity sha512-cWCBeX4FCgjcKmuVK384MT582RIAakpUSeMF/NPVmhO8cWiG+LeQLnBordvLolb0iXYzfUvalgmycYAE5Sy6Xw==

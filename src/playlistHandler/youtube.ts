@@ -2,8 +2,17 @@ import { queueAdd } from '../controller';
 import { CONSTANT_URL, ERROR_MESSAGES } from '../shared/constants';
 import axios from 'axios';
 import { searchSong } from '../shared/yt-search';
+import { Message } from 'discord.js';
 
-export const playlistYoutube = async (message, url: string, nextPageToken?: string) => {
+/**
+ * Extracts the playlist id from a URL fetches the entire playlist data using the youtube API
+ * @param {Message} message The incoming message
+ * @param {string} url The URL of the youtube playlist
+ * @param {string} nextPageToken Next page's token
+ * @returns {booleans} Returns a boolean value
+ */
+
+export const playlistYoutube = async (message:Message, url: string, nextPageToken?: string):Promise<boolean> => {
   if (!(url.indexOf('list=') > 5)) return false;
   let listID = url.substring(url.indexOf('list=') + 5, url.length);
   if (url.indexOf('&', url.indexOf('list=')) > 1)
@@ -25,7 +34,13 @@ export const playlistYoutube = async (message, url: string, nextPageToken?: stri
   return true;
 };
 
-const addPlaylistSongToQueue = async (list, message) => {
+/**
+ * Takes all of the songs in the playlist and adds it to the queue.
+ * @param {any} list The data fetched from the youtube API
+ * @param {Message} message The incoming message
+ */
+
+const addPlaylistSongToQueue = async (list:any, message:Message):Promise<void> => {
   for (let i = 0; i < list.data.items.length; i++) {
     if (list.data.items[i].snippet.title.trim() !== 'Deleted video') {
       let songData = await searchSong(message, list.data.items[i].snippet.title);

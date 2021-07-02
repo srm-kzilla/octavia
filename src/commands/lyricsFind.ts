@@ -1,8 +1,15 @@
+import { Message } from 'discord.js';
 import config from '../config';
 import { EMBED, ERROR_MESSAGES, MESSAGES, randomNumber } from '../shared/constants';
 import { lyricsHelper } from '../shared/lyrics';
 
-export const lyricsFindCommandHandler = async message => {
+/**
+ * Handles the "findlyrics" command by searching for it using the Genuis API 
+ * @param {Message} message The incoming message
+ * @returns {Promise<Message>} Returns the message after sending it to the user
+ */
+
+export const lyricsFindCommandHandler = async (message:Message):Promise<Message>=> {
   if (message.content.trim().split(' ').length < 3) return message.channel.send(ERROR_MESSAGES.INCORRECT_SYNTAX);
   message.channel.send(MESSAGES.FETCHING_LYRICS[randomNumber(MESSAGES.FETCHING_LYRICS.length)]);
   let songDetails = message.content

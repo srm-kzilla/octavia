@@ -64,7 +64,7 @@ $ yarn start
 
 ## Shout outs 💥
 
-| <p align="center">![Harsh Goel](https://github.com/harshgoel05.png?size=128)<br>[Harsh Goel](https://github.com/harshgoel05)</p> | <p align="center">![Shashank Kumar](https://avatars.githubusercontent.com/u/74819565?s=128)<br>[Shashank Kumar](https://github.com/shawshankkumar)</p> |
+ |<p align="center">![Harsh Goel](https://github.com/harshgoel05.png?size=128)<br>[Harsh Goel](https://github.com/harshgoel05)</p> | <p align="center">![Aniruddha Chatterjee](https://github.com/ruddha2001.png?size=128)<br>[Aniruddha Chatterjee](https://github.com/ruddha2001)</p> | <p align="center">![Shashank Kumar](https://avatars.githubusercontent.com/u/74819565?s=128)<br>[Shashank Kumar](https://github.com/shawshankkumar)</p> |
 | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 ## License 📜

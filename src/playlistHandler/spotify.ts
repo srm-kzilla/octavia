@@ -1,11 +1,19 @@
 import axios from 'axios';
+import { Message } from 'discord.js';
 import { queueAdd } from '../controller';
 import { getSpotifyToken as getSpotifyToken } from '../loaders/nodecache';
 import { CONSTANT_URL, REGEX } from '../shared/constants';
 import { validateRegex } from '../shared/validation';
 import { searchSong } from '../shared/yt-search';
 
-export const spotifyLinkHandler = async (message, url) => {
+/**
+ * Validates the spotify URL and categorizes type of the URL(album, playlist or a single song) and then adds it to the queue after fetching the data using the spotify APIs.
+ * @param message The incoming message
+ * @param url The URL of the spotify song, playlist or album
+ * @returns {Promise<Message>} Returns the message sent to user
+ */
+
+export const spotifyLinkHandler = async (message:Message, url:string):Promise<Message> => {
   let typeOfRequest: string;
   let id: string;
   if (validateRegex(url, REGEX.SPOTIFY_WEB_URL_REGEX)) {

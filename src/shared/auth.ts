@@ -1,6 +1,13 @@
+import { Message } from 'discord.js';
 import { ERROR_MESSAGES } from './constants';
 
-export const userInVoiceChannelCheck = message => {
+/**
+ * Checks whether the user is in a voice channel or not.
+ * @param {Message} message The incoming message
+ * @returns {boolean} Returns a boolean value
+ */
+
+export const userInVoiceChannelCheck = (message:Message) : boolean=> {
   if (!message.member.voice.channel) {
     message.reply(ERROR_MESSAGES.USER_NOT_IN_A_VOICE_CHANNEL);
     return false;

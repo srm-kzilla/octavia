@@ -1,8 +1,15 @@
+import { Message } from 'discord.js';
 import { connectionMap } from '../controller';
 import { userInVoiceChannelCheck } from '../shared/auth';
 import { EMBED, ERROR_MESSAGES, MESSAGES } from '../shared/constants';
 
-export const shuffleCommandHandler = message => {
+/**
+ * Handles the "shuffle" command by shuffling all of the songs except the current song
+ * @param {Message} message The incoming message
+ * @returns {Promise<Message>} Send the user a message and then returns that
+ */
+
+export const shuffleCommandHandler = (message:Message):Promise<Message> => {
   if (userInVoiceChannelCheck(message)) {
     if (!connectionMap.get(message.guild.id).queue)
       return message.channel.send(EMBED().setDescription(ERROR_MESSAGES.QUEUE_EMPTY));
