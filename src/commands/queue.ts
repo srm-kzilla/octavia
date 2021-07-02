@@ -55,7 +55,7 @@ const queuePageHandler = ( message: Message, pageNumber:string|number) : string=
 
 const splitArray = (queueArray:Array<Queue>):Array<Array<Queue>>=> {
   let pageSize = 10,
-    pageArray:Array<Array<Queue>>;
+    pageArray:Array<Array<Queue>>=[];
   for (let index = 0; index < queueArray.length; index += pageSize) {
     pageArray.push(queueArray.slice(index, index + pageSize));
   }
