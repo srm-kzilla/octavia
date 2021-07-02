@@ -2,7 +2,12 @@ import { Message } from 'discord.js';
 import config from '../config';
 import { COMMANDS, CONSTANT_URL, EMBED, MESSAGES } from '../shared/constants';
 
-export const helpCommandHandler = (message: Message) => {
+/**
+ * Handles the "help" command and sends the "help" message.
+ * @param {Message} message The incoming message
+ */
+
+export const helpCommandHandler = (message: Message) : void=> {
   message.channel.send(
     EMBED()
       .setThumbnail(CONSTANT_URL.JILL_THUMBNAIL)

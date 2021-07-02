@@ -1,7 +1,12 @@
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import config from '../config';
 
-export const EMBED = () => {
+/**
+ * Creates a basic embed object with footer and timestamp to be used elsewhere.
+ * @returns {MessageEmbed} Returns an embed object
+ */
+
+export const EMBED = (): MessageEmbed => {
   return new MessageEmbed().setTimestamp().setFooter('Made with 🧡 by SRMKZILLA!').setColor(COLOR_CODES.DEFAULT);
 };
 
@@ -19,9 +24,17 @@ export const COLOR_CODES = {
   CLEAR: '#ff5500',
 };
 
-export const randomNumber = (max: number) => {
+/**
+ * Creates a random number between 1 and the param max
+ * @param {number} max The upper limit of the random numbers to be generated
+ * @returns {number} Returns a random number 
+ */
+
+export const randomNumber = (max: number):number => {
   return Math.floor(Math.random() * Math.floor(max));
 };
+
+
 export const COMMANDS = {
   HELP: 'help',
   PLAY: 'play',
