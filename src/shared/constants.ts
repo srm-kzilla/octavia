@@ -27,13 +27,12 @@ export const COLOR_CODES = {
 /**
  * Creates a random number between 1 and the param max
  * @param {number} max The upper limit of the random numbers to be generated
- * @returns {number} Returns a random number 
+ * @returns {number} Returns a random number
  */
 
-export const randomNumber = (max: number):number => {
+export const randomNumber = (max: number): number => {
   return Math.floor(Math.random() * Math.floor(max));
 };
-
 
 export const COMMANDS = {
   HELP: 'help',
@@ -82,7 +81,7 @@ export const ERROR_MESSAGES = {
 
 export const MESSAGES = {
   PLAYLIST_ADDED: 'Your playlist has been added to the queue! 🎶',
-  HELP_TITLE: 'Hi! I am Jill, your favourite Music bot! 🤖',
+  HELP_TITLE: `Hi! I am ${config.DISCORD_BOT_NAME}, your favourite Music bot! 🤖`,
   HELP_DESCRIPTION:
     'My lazy friends at **SRMKZILLA** want me to tell you that you can talk to me directly by first joining a voice channel and then using the following commands:',
   LEAVE_CHANNEL: 'I have left the voice channel on your Command! 💔',
