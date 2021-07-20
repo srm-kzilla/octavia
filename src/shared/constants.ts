@@ -128,7 +128,7 @@ export const EMOJIS = {
 };
 
 export const CONSTANT_URL = {
-  JILL_THUMBNAIL: 'https://cdn.discordapp.com/attachments/815937266777325618/825810924522700830/0.jpg',
+  JILL_THUMBNAIL: 'https://srmkzilla.s3.ap-south-1.amazonaws.com/logo_jill.jpg',
   SPOTIFY_TOKEN: `https://accounts.spotify.com/api/token`,
   YOUTUBE_API: (listID, nextPageToken) => {
     if (!nextPageToken)
