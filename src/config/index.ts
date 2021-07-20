@@ -4,6 +4,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default {
   /**
+   * Music bot's name
+   */
+  DISCORD_BOT_NAME: process.env.DISCORD_BOT_NAME,
+  /**
    * Database the app should connect to
    */
   /**
