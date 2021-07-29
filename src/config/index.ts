@@ -26,7 +26,7 @@ export default {
   /**
    * Database the app should connect to
    */
-  PREFIX: process.env.PREFIX || '#kzjill',
+  PREFIX: process.env.PREFIX || '#octavia',
 
   /**
    * Database the app should connect to

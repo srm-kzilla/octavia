@@ -15,8 +15,8 @@ async function initializeClient(): Promise<Client> {
   client.login(config.TOKEN);
   client.on('ready', () => {
     LoggerInstance.info(`Bot Id: ${client.user.tag}`);
-    client.user.setActivity(`your favourite music!`, {
-      type: 'PLAYING',
+    client.user.setActivity(`${config.PREFIX}`, {
+      type: 'LISTENING',
     });
   });
   return client;
