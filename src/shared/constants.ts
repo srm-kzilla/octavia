@@ -50,6 +50,7 @@ export const COMMANDS = {
   CLEAR_QUEUE: 'clear',
   SKIP_TO: 'skipto',
   NEXT: 'next',
+  STOP: 'stop',
 };
 export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: [
@@ -85,6 +86,7 @@ export const MESSAGES = {
   HELP_DESCRIPTION:
     'My lazy friends at **SRMKZILLA** want me to tell you that you can talk to me directly by first joining a voice channel and then using the following commands:',
   LEAVE_CHANNEL: 'I have left the voice channel on your Command! 💔',
+  STOP_MUSIC: 'I have stopped playing the music and have left the voice channel on your Command! 💔',
   SONG_OVER: 'Finished playing: ',
   SONG_START: '💃🕺Now playing : ',
   LOOP_ON: 'Loop on! ➿',
@@ -124,7 +126,7 @@ export const REGEX = {
 export const EMOJIS = {
   REACTION_DEFAULT_CASE: '❌',
   REACTION_CORRECT_COMMAND: '🎵',
-  KZILLA_CUSTOM_EMOJI: '💖',
+  KZILLA_CUSTOM_EMOJI: ':jill:',
 };
 
 export const CONSTANT_URL = {

@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, UserManager } from 'discord.js';
 
 import {
   clearCommandHandler,
@@ -22,7 +22,7 @@ import { connectionMap } from './controller';
 import Loaders from './loaders';
 import discord from './loaders/discord';
 import LoggerInstance from './loaders/logger';
-import { COMMANDS, EMOJIS, ERROR_MESSAGES, randomNumber } from './shared/constants';
+import { COMMANDS, EMOJIS, ERROR_MESSAGES, MESSAGES, randomNumber } from './shared/constants';
 import { membersInVoiceChannelCounter } from './shared/leaveChannel';
 
 /**
@@ -44,7 +44,7 @@ const discordHandler = async () => {
             await playCommandHandler(message);
             break;
           case COMMANDS.LEAVE:
-            leaveCommandHandler(message);
+            leaveCommandHandler(message, MESSAGES.LEAVE_CHANNEL);
             break;
           case COMMANDS.QUEUE:
             queueCommandHandler(message);
@@ -78,8 +78,12 @@ const discordHandler = async () => {
             break;
           case COMMANDS.SKIP_TO:
             await skiptoCommandHandler(message);
+            break;
           case COMMANDS.NEXT:
-            skipCommandHandler(message);
+            await skipCommandHandler(message);
+            break;
+          case COMMANDS.STOP:
+            leaveCommandHandler(message, MESSAGES.STOP_MUSIC);
             break;
           default:
             defaultCaseHandler(message);
