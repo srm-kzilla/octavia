@@ -126,7 +126,6 @@ export const REGEX = {
 export const EMOJIS = {
   REACTION_DEFAULT_CASE: '❌',
   REACTION_CORRECT_COMMAND: '🎵',
-  KZILLA_CUSTOM_EMOJI: ':jill:',
 };
 
 export const CONSTANT_URL = {

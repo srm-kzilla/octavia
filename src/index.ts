@@ -88,7 +88,7 @@ const discordHandler = async () => {
             defaultCaseHandler(message);
             return message.react(EMOJIS.REACTION_DEFAULT_CASE);
         }
-        if (message.guild.id === config.KZILLA_GUILD_ID) await message.react(EMOJIS.KZILLA_CUSTOM_EMOJI);
+        if (message.guild.id === config.KZILLA_GUILD_ID) await message.react(config.KZILLA_CUSTOM_EMOJI);
         else await message.react(EMOJIS.REACTION_CORRECT_COMMAND);
       }
     } catch (error) {
