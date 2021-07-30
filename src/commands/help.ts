@@ -7,7 +7,7 @@ import { COMMANDS, CONSTANT_URL, EMBED, MESSAGES } from '../shared/constants';
  * @param {Message} message The incoming message
  */
 
-export const helpCommandHandler = (message: Message) : void=> {
+export const helpCommandHandler = (message: Message): void => {
   message.channel.send(
     EMBED()
       .setThumbnail(CONSTANT_URL.JILL_THUMBNAIL)
@@ -44,7 +44,7 @@ export const helpCommandHandler = (message: Message) : void=> {
         },
         {
           name: '`' + `${config.PREFIX} ${COMMANDS.SHUFFLE}` + '`',
-          value: `Want some spice in life? Well, shuffle you songs and break the monotony. 😮`,
+          value: `Want some spice in life? Well, shuffle your songs and break the monotony. 😮`,
         },
         {
           name: '`' + `${config.PREFIX} ${COMMANDS.SKIP}` + '`',
