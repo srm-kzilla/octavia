@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'octavia',
+      name: 'Octavia',
       script: 'yarn start',
     },
   ],
