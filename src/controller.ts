@@ -14,16 +14,16 @@ import { setTimer } from './shared/leaveChannel';
 export let connectionMap = new Map();
 
 /**
- * The main controller receives the play request and does one of these: resumes the music, adds a song(or a playlist/album) or sends an appropriate error message. 
+ * The main controller receives the play request and does one of these: resumes the music, adds a song(or a playlist/album) or sends an appropriate error message.
  * @param {Message} message The incoming message from the user
  * @returns {Promise<void|Message>} Returns either void(when the song is resumed) or a message(when a song is added or an error occurs)
  */
 
-export const playRequest = async (message: Message):Promise<void|Message> => {
+export const playRequest = async (message: Message): Promise<void | Message> => {
   try {
     let arrayKeywords = message.content.trim().split(' ');
     if (arrayKeywords.length < 3) {
-      if ((connectionMap.get(message.guild.id) as Play)) return resumeCommandHandler(message);
+      if (connectionMap.get(message.guild.id) as Play) return resumeCommandHandler(message);
       return message.channel.send(
         EMBED().setDescription(ERROR_MESSAGES.NO_SONG_URL_OR_KEYWORD).setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE),
       );
@@ -57,10 +57,7 @@ export const playRequest = async (message: Message):Promise<void|Message> => {
       await spotifyLinkHandler(message, songUrl);
       message.channel.send(EMBED().setDescription(MESSAGES.SPOTIFY_URL_PLAYING).setColor(COLOR_CODES.PLAYLIST_ADDED));
     } else {
-      let songName = message.content
-        .trim()
-        .substring(message.content.trim().indexOf(' ', config.PREFIX.length + 2))
-        .trim();
+      const songName = message.content.trim().substring(message.content.trim().split(' ', 2).join(' ').length + 1);
       let song = await searchSong(message, songName);
       if (song.url !== null && song.title !== null) {
         let finalSongDetails = { ...song, originalTitle: songName };
@@ -77,11 +74,11 @@ export const playRequest = async (message: Message):Promise<void|Message> => {
 
 /**
  * Establishes a connection of the discord application with the voice channel and then stores and returns that connection.
- * @param {Message} message The incoming message 
- * @returns {Promise<VoiceConnection>} Returns a voice connection 
+ * @param {Message} message The incoming message
+ * @returns {Promise<VoiceConnection>} Returns a voice connection
  */
 
-const connection = async (message: Message):Promise<VoiceConnection> => {
+const connection = async (message: Message): Promise<VoiceConnection> => {
   if (!message.guild.me.voice.channel) {
     let connection = await message.member.voice.channel.join();
     await connection.voice.setSelfDeaf(true);
@@ -100,16 +97,16 @@ const connection = async (message: Message):Promise<VoiceConnection> => {
 };
 
 /**
- * Accepts the song information and adds it to the queue and plays the song on the top of the queue(If none are being played). 
+ * Accepts the song information and adds it to the queue and plays the song on the top of the queue(If none are being played).
  * @param {Message} message The incoming message
  * @param {{ title: string; url: string; originalTitle: string; artistName: string; timestamp: string }} songData Information about the song to be added to the queue
  */
 
 export const queueAdd = async (
-  message:Message,
+  message: Message,
   songData: { title: string; url: string; originalTitle: string; artistName: string; timestamp: string },
-):Promise<void> => {
-  let music = (connectionMap.get(message.guild.id) as Play);
+): Promise<void> => {
+  let music = connectionMap.get(message.guild.id) as Play;
   music.queue.push(songData);
   if (music.queue.length - (connectionMap.get(message.guild.id) as Play).currentSong === 1)
     await playUrl(message, music.queue[(connectionMap.get(message.guild.id) as Play).currentSong]);
@@ -122,13 +119,16 @@ export const queueAdd = async (
  * @returns {Promise<Message>} Return the message sent to the user.
  */
 
-export const playUrl = async (message:Message, song: {
+export const playUrl = async (
+  message: Message,
+  song: {
     title: string;
     url: string;
     originalTitle: string;
     artistName: string;
     timestamp: string;
-}) :Promise<Message>=> {
+  },
+): Promise<Message> => {
   try {
     if (!song.title) return message.channel.send('could not find the song');
     let stream = ytdl(song.url, { filter: 'audioonly' });
@@ -149,16 +149,22 @@ export const playUrl = async (message:Message, song: {
  * @param {{title: string; url: string; originalTitle: string; artistName: string; timestamp: string;}}song Information about the song
  */
 
-const dispatcherControl = async ( message: Message, dispatcher: StreamDispatcher, song: {
+const dispatcherControl = async (
+  message: Message,
+  dispatcher: StreamDispatcher,
+  song: {
     title: string;
     url: string;
     originalTitle: string;
     artistName: string;
     timestamp: string;
-}) : Promise<void>=> {
+  },
+): Promise<void> => {
   let msg: Message;
+  console.log(song);
   dispatcher.on('start', async () => {
-    if ((connectionMap.get(message.guild.id) as Play).timer) clearTimeout((connectionMap.get(message.guild.id) as Play).timer);
+    if ((connectionMap.get(message.guild.id) as Play).timer)
+      clearTimeout((connectionMap.get(message.guild.id) as Play).timer);
     msg = await message.channel.send(
       EMBED()
         .setDescription(`🎶 **${MESSAGES.SONG_START}** [${song.originalTitle}](${song.url})     [${song.timestamp}]`)
@@ -175,14 +181,20 @@ const dispatcherControl = async ( message: Message, dispatcher: StreamDispatcher
     ).delete({ timeout: 15000 });
     await msg.delete();
     (connectionMap.get(message.guild.id) as Play).currentSong++;
-    if ((connectionMap.get(message.guild.id) as Play).queue.length - (connectionMap.get(message.guild.id) as Play).currentSong > 0) {
+    if (
+      (connectionMap.get(message.guild.id) as Play).queue.length -
+        (connectionMap.get(message.guild.id) as Play).currentSong >
+      0
+    ) {
       await playUrl(
         message,
         (connectionMap.get(message.guild.id) as Play).queue[(connectionMap.get(message.guild.id) as Play).currentSong],
       );
     }
     if (
-      (connectionMap.get(message.guild.id) as Play).queue.length - (connectionMap.get(message.guild.id) as Play).currentSong === 0 &&
+      (connectionMap.get(message.guild.id) as Play).queue.length -
+        (connectionMap.get(message.guild.id) as Play).currentSong ===
+        0 &&
       (connectionMap.get(message.guild.id) as Play).loop === true
     ) {
       (connectionMap.get(message.guild.id) as Play).currentSong = 0;
