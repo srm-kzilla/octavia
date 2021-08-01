@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,800;0,900;1,300&display=swap');
 *,
 ::after,
 ::before {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: Nunito Sans, sans-serif;
 }
 
 body {
@@ -43,15 +43,26 @@ div.particles {
 
 .logo {
   margin: auto;
-  width: 10rem;
+  width: 8rem;
   margin-bottom: 0;
+}
+
+.contact-us {
+  margin-top: 2rem;
+  font-weight: 600;
+}
+
+.contact-us a {
+  border-bottom: 1px dotted yellow;
+  text-decoration: none;
+  color: #ffc300;
 }
 
 h1 {
   color: #fafafa;
   text-align: center;
   margin: 0 auto;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 p {
