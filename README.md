@@ -18,8 +18,6 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on th
     <img src="https://img.shields.io/badge/author-SRMKZILLA-orange" alt="author SRMKZILLA"/>
 </p>
 
-> To make this cool music bot your own, refer to this [Wiki](https://github.com/srm-kzilla/jack/wiki/Make-Jack-your-own)
-
 ## Commands 🔧
 
 > There's only so much Octavia can do without you giving her further instructions
