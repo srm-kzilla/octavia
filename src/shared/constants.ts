@@ -129,7 +129,7 @@ export const EMOJIS = {
 };
 
 export const CONSTANT_URL = {
-  JILL_THUMBNAIL: 'https://srmkzilla.s3.ap-south-1.amazonaws.com/logo_octavia.jpg',
+  OCTAVIA_THUMBNAIL: 'https://srmkzilla.s3.ap-south-1.amazonaws.com/logo_octavia.jpg',
   SPOTIFY_TOKEN: `https://accounts.spotify.com/api/token`,
   YOUTUBE_API: (listID, nextPageToken) => {
     if (!nextPageToken)

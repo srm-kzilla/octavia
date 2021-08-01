@@ -10,7 +10,7 @@ import { COMMANDS, CONSTANT_URL, EMBED, MESSAGES } from '../shared/constants';
 export const helpCommandHandler = (message: Message): void => {
   message.channel.send(
     EMBED()
-      .setThumbnail(CONSTANT_URL.JILL_THUMBNAIL)
+      .setThumbnail(CONSTANT_URL.OCTAVIA_THUMBNAIL)
       .setTitle(MESSAGES.HELP_TITLE)
       .setDescription(MESSAGES.HELP_DESCRIPTION)
       .addFields(
