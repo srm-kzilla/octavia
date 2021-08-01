@@ -2,12 +2,12 @@
   <img alt="SRMKZILLA Logo" src="https://cdn-images-1.medium.com/max/1200/1*V14ZK8_mXQadno4eLtOnIw.png" height="56" />
 </div>
 <div align="center">
-  <img alt="Jill Logo" src="https://buckeyek9.com/wp-content/uploads/2019/08/berkay-gumustekin-ngqyo2AYYnE-unsplash-840x410.jpg" height="56" />
+  <img alt="Octavia's Logo" src="https://srmkzilla.s3.ap-south-1.amazonaws.com/logo_octavia.jpg" height="56" />
 </div>
 
 <br>
 <p align="center">
-Meet Jill, everyone's favourite music bot!
+Meet Octavia, everyone's favourite music bot!
 </p>
 <p align="center">
 crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on the <a href="https://srmkzilla.net">SRMKZILLA</a> team.
@@ -22,25 +22,25 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friends on th
 
 ## Commands 🔧
 
-> There's only so much Jill can do without you giving her further instructions
+> There's only so much Octavia can do without you giving her further instructions
 
 - **Commands**
 
-  - **`#kzjill help` - Get everything what Jill can do**
-  - **`#kzjill play <song's name or youtube link(playlist or just a song) or spotify link>` - Play your favourite songs**
-  - **`#kzjill pause` - Pause the music!**
-  - **`#kzjill resume` - Resume the song**
-  - **`#kzjill lyrics ` - Find the lyrics of the song you are playing.**
-  - **`#kzjill findLyrics <song's name> , <artist's name>` - Use this to find the lyrics of any song**
-  - **`#kzjill stop` - Stop the song**
-  - **`#kzjill queue` - Get the current queue.**
-  - **`#kzjill queue <page number>` - Get a specific queue page.**
-  - **`#kzjill shuffle` - Shuffle the queue**
-  - **`#kzjill clear` - clear the queue**
-  - **`#kzjill skip` - Skip the song**
-  - **`#kzjill skipto` - skip to a particular song number**
-  - **`#kzjill loop` - loop the queue**
-  - **`#kzjill previous` - Go to the previous song**
+  - **`#octavia help` - Get everything what Octavia can do**
+  - **`#octavia play <song's name or youtube link(playlist or just a song) or spotify link>` - Play your favourite songs**
+  - **`#octavia pause` - Pause the music!**
+  - **`#octavia resume` - Resume the song**
+  - **`#octavia lyrics ` - Find the lyrics of the song you are playing.**
+  - **`#octavia findLyrics <song's name> , <artist's name>` - Use this to find the lyrics of any song**
+  - **`#octavia stop` - Stop the song**
+  - **`#octavia queue` - Get the current queue.**
+  - **`#octavia queue <page number>` - Get a specific queue page.**
+  - **`#octavia shuffle` - Shuffle the queue**
+  - **`#octavia clear` - clear the queue**
+  - **`#octavia skip` - Skip the song**
+  - **`#octavia skipto` - skip to a particular song number**
+  - **`#octavia loop` - loop the queue**
+  - **`#octavia previous` - Go to the previous song**
 
 ## Installation 🔧
 
@@ -69,7 +69,7 @@ $ yarn start
 
 ## License 📜
 
-`Jill` is available under the MIT license. See the LICENSE file for more info.
+`Octavia` is available under the MIT license. See the LICENSE file for more info.
 
 ## Contributing 🤝
 

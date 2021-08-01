@@ -21,10 +21,10 @@ export default {
    */
   KZILLA_GUILD_ID: process.env.KZILLA_GUILD_ID,
   /**
-   * Database the app should connect to
+   *Prefix(s) to be used
    */
   PREFIX: process.env.PREFIX || '#octavia',
-
+  PREFIX_2: process.env.PREFIX_2 || '#oc',
   /**
    * Database the app should connect to
    */

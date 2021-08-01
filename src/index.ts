@@ -32,7 +32,7 @@ const discordHandler = async () => {
   client.on('message', async (message: Message) => {
     try {
       const messageArray = message.content.trim().split(' ');
-      if (!message.author.bot && messageArray[0] === config.PREFIX) {
+      if (!message.author.bot && (messageArray[0] === config.PREFIX || messageArray[0] === config.PREFIX_2)) {
         if (message.guild.me.voice.channel)
           membersInVoiceChannelCounter(message.guild.voice.channel.members, message.guild);
         switch (messageArray[1]) {
