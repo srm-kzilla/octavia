@@ -2,7 +2,7 @@
   <img alt="SRMKZILLA Logo" src="https://cdn-images-1.medium.com/max/1200/1*V14ZK8_mXQadno4eLtOnIw.png" height="56" />
 </div>
 <div align="center">
-  <img alt="Octavia's Logo" src="https://cdn.discordapp.com/attachments/825481380967874560/867138566895435816/Group.png" height="56" />
+  <img alt="Octavia's Logo" src="https://srmkzilla.s3.ap-south-1.amazonaws.com/logo_octavia.jpg" height="56" />
 </div>
 
 <br>

@@ -1,7 +1,7 @@
 import { createLogger } from 'bunyan';
 
 const LoggerInstance = createLogger({
-  name: 'jill',
+  name: 'octavia',
   streams: [
     {
       level: 'info',
