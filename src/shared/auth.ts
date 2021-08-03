@@ -26,7 +26,13 @@ export const userInVoiceChannelCheck = (message: Message): boolean => {
   return true;
 };
 
-export const kzillaBotAdminCheck = async (message: Message) => {
+/**
+ * Check if the user has the necesarry roles or not.
+ * @param {Message} message The incoming message
+ * @returns {boolean} Returns a boolean value
+ */
+
+export const kzillaBotAdminCheck = async (message: Message): Promise<boolean> => {
   if (message.member.roles.cache.find(role => role.id === config.KZILLA_BOT_ADMIN_ID)) return true;
   message.reply(ERROR_MESSAGES.USER_NOT_ADMIN);
   return false;
