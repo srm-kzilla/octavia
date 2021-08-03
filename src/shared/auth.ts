@@ -1,4 +1,5 @@
 import { Message } from 'discord.js';
+import config from '../config';
 import { ERROR_MESSAGES } from './constants';
 
 /**
@@ -7,7 +8,7 @@ import { ERROR_MESSAGES } from './constants';
  * @returns {boolean} Returns a boolean value
  */
 
-export const userInVoiceChannelCheck = (message:Message) : boolean=> {
+export const userInVoiceChannelCheck = (message: Message): boolean => {
   if (!message.member.voice.channel) {
     message.reply(ERROR_MESSAGES.USER_NOT_IN_A_VOICE_CHANNEL);
     return false;
@@ -23,4 +24,10 @@ export const userInVoiceChannelCheck = (message:Message) : boolean=> {
     }
   }
   return true;
+};
+
+export const kzillaBotAdminCheck = async (message: Message) => {
+  if (message.member.roles.cache.find(role => role.id === config.KZILLA_BOT_ADMIN_ID)) return true;
+  message.reply(ERROR_MESSAGES.USER_NOT_ADMIN);
+  return false;
 };
