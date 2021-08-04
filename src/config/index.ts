@@ -4,6 +4,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default {
   /**
+   * The id of the "SRMKZILLA bot admin" role
+   */
+  KZILLA_BOT_ADMIN_ID: process.env.KZILLA_BOT_ADMIN_ID,
+  /**
    * SRMKZILLA's custom emoji for the music bot
    */
   KZILLA_CUSTOM_EMOJI: process.env.KZILLA_CUSTOM_EMOJI,

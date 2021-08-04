@@ -51,8 +51,10 @@ export const COMMANDS = {
   SKIP_TO: 'skipto',
   NEXT: 'next',
   STOP: 'stop',
+  KZADMIN_GUILD_COUNT: 'guildcount',
 };
 export const ERROR_MESSAGES = {
+  USER_NOT_ADMIN: 'You do not have the permission to use this command, Mr Bond.',
   UNKNOWN_ERROR: [
     `An error occured with me. I'd tell you but then I'd have to kill you.`,
     `Uh Oh, someone forgot to pay the server bills and now I can't function properly.`,
@@ -81,6 +83,7 @@ export const ERROR_MESSAGES = {
 };
 
 export const MESSAGES = {
+  GUILD_COUNT_MESSAGE: 'Howdy cowboy 🤠! Here is the list of the guilds that I in:',
   PLAYLIST_ADDED: 'Your playlist has been added to the queue! 🎶',
   HELP_TITLE: `Hi! I am ${config.DISCORD_BOT_NAME}, your favourite Music bot! 🤖`,
   HELP_DESCRIPTION:

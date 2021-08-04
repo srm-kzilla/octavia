@@ -15,6 +15,7 @@ import {
   shuffleCommandHandler,
   skipCommandHandler,
   skiptoCommandHandler,
+  guildCountHandler,
 } from './commands';
 import config from './config';
 import { connectionMap } from './controller';
@@ -83,6 +84,9 @@ const discordHandler = async () => {
             break;
           case COMMANDS.STOP:
             leaveCommandHandler(message, MESSAGES.STOP_MUSIC);
+            break;
+          case COMMANDS.KZADMIN_GUILD_COUNT:
+            await guildCountHandler(message);
             break;
           default:
             defaultCaseHandler(message);
