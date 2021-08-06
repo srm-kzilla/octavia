@@ -12,7 +12,7 @@ import { Play, Queue } from '../shared/customTypes';
 
 export const queueCommandHandler = (message:Message) :Promise<Message>=> {
   if (userInVoiceChannelCheck(message)) {
-    let arrayKeywords = message.content.trim().split(' ');
+    let arrayKeywords = message.content.trim().split(/[ ]+/);
     if (arrayKeywords.length < 3) return message.channel.send(EMBED().setDescription(queueCurrentPage(message)));
     message.channel.send(EMBED().setDescription(queuePageHandler(message, arrayKeywords[2])));
   }

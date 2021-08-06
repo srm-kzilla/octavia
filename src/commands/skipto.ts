@@ -10,7 +10,7 @@ import { COLOR_CODES, EMBED, ERROR_MESSAGES } from '../shared/constants';
  */
 
 export const skiptoCommandHandler = async (message:Message): Promise<Message> => {
-  let arrayKeywords:Array<string|number> = message.content.trim().split(' ');
+  let arrayKeywords:Array<string|number> = message.content.trim().split(/[ ]+/);
   if (arrayKeywords.length < 3)
     return message.channel.send(
       EMBED().setDescription(ERROR_MESSAGES.INCORRECT_SYNTAX).setColor(COLOR_CODES.WRONG_COMMAND_COLOR_CODE),

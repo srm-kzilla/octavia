@@ -21,7 +21,7 @@ export let connectionMap = new Map();
 
 export const playRequest = async (message: Message): Promise<void | Message> => {
   try {
-    let arrayKeywords = message.content.trim().split(' ');
+    let arrayKeywords = message.content.trim().split(/[ ]+/);
     if (arrayKeywords.length < 3) {
       if (connectionMap.get(message.guild.id) as Play) return resumeCommandHandler(message);
       return message.channel.send(
