@@ -10,7 +10,7 @@ import { EMBED, ERROR_MESSAGES } from '../shared/constants';
  */
 
 export const skipCommandHandler = async (message:Message) : Promise<Message>=> {
-  let arrayKeywords = message.content.trim().split(' ');
+  let arrayKeywords = message.content.trim().split(/[ ]+/);
   if (userInVoiceChannelCheck(message) && arrayKeywords.length < 3) {
     if (connectionMap.get(message.guild.id).queue.length === 0)
       return message.channel.send(EMBED().setDescription(ERROR_MESSAGES.UNABLE_TO_SKIP));
